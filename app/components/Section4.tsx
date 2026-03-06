@@ -1,25 +1,43 @@
+"use client";
 import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="w-full min-h-screen flex">
+    <section className="w-full min-h-screen flex overflow-hidden">
+
+      {/* Google Fonts */}
+      <style>
+        {`
+          @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Allura&display=swap');
+
+          .poppins {
+            font-family: 'Poppins', sans-serif;
+          }
+
+          .allura {
+            font-family: 'Allura', cursive;
+          }
+        `}
+      </style>
 
       {/* LEFT IMAGE */}
       <div className="w-1/2 relative">
         <Image
-          src="/watch.png"
+          src="/Img9.avif"
           alt="watch"
           fill
           className="object-cover"
         />
       </div>
 
-      {/* RIGHT CONTENT */}
-      <div className="w-1/2 bg-gray-100 flex items-center">
-        <div className="max-w-md mx-auto">
+      {/* RIGHT SIDE */}
+      <div className="w-1/2 flex items-center">
+        <div className="max-w-md mx-auto poppins">
 
-          <h1 className="text-5xl font-bold text-gray-900 leading-tight">
-            THE WATCH THAT <br /> DEFIED TIME
+          <h1 className="text-5xl font-semibold text-gray-900 leading-tight">
+            THE <span className="allura text-6xl font-normal">Watch</span> THAT
+            <br />
+            DEFIED TIME
           </h1>
 
           <p className="mt-6 text-gray-600 text-lg">
@@ -27,7 +45,7 @@ export default function Hero() {
             blends cinematic emotion with timeless craftsmanship.
           </p>
 
-          <button className="mt-8 px-8 py-3 border border-gray-400 text-gray-800 hover:bg-black hover:text-white transition">
+          <button className="mt-8 px-8 py-3 border border-gray-400 text-gray-800 hover:bg-black hover:text-white font-semibold transition cursor-pointer">
             DISCOVER
           </button>
 
