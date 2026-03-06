@@ -1,31 +1,21 @@
 import Image from "next/image";
+import { Poppins } from "next/font/google";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300","400","500","600","700"],
+});
 
 export default function WatchSection() {
   const products = [
-    {
-      name: "Tatum",
-      price: "Rs.131,596.80",
-      img: "/Img5.png",
-    },
-    {
-      name: "Theo",
-      price: "Rs.43,078.77",
-      img: "/Img6.png",
-    },
-    {
-      name: "Xavier",
-      price: "Rs.88,321.32",
-      img: "/Img7.png",
-    },
-    {
-      name: "Pro-mariner",
-      price: "Rs.302,731.64",
-      img: "/Img8.png",
-    },
+    { name: "Tatum", price: "Rs.131,596.80", img: "/Img5.webp" },
+    { name: "Theo", price: "Rs.43,078.77", img: "/Img6.webp" },
+    { name: "Xavier", price: "Rs.88,321.32", img: "/Img7.webp" },
+    { name: "Pro-mariner", price: "Rs.302,731.64", img: "/Img8.webp" },
   ];
 
   return (
-    <section className="py-12">
+    <section className={`py-12 ${poppins.className}`}>
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center px-6">
 
         {/* Left Image */}
@@ -58,7 +48,7 @@ export default function WatchSection() {
               <h3 className="mt-3 text-sm font-medium">{item.name}</h3>
               <p className="text-xs text-gray-600 mt-1">{item.price}</p>
 
-              <button className="mt-2 border border-black px-4 py-1 text-xs hover:bg-black hover:text-white transition">
+              <button className="mt-2 border border-black px-4 py-1 text-xs hover:bg-black hover:text-white transition cursor-pointer">
                 Add To Cart
               </button>
             </div>
