@@ -1,33 +1,42 @@
 "use client";
 import { BsCart3 } from "react-icons/bs";
 
-export default function Navbar() {
+export default function Page() {
   return (
-    <nav className="w-full flex items-center justify-between px-10 py-5 relative">
+    <>
+      {/* Google Font */}
+      <style>
+        {`
+        @import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
+        `}
+      </style>
 
-      {/* Background split */}
-      <div className="absolute inset-0 flex -z-10">
-        <div className="w-1/2 bg-[#0b1d3a]"></div>
-        <div className="w-1/2 bg-white"></div>
-      </div>
+      <nav className="w-full flex items-center justify-between px-10 py-6 relative">
 
-      {/* Logo */}
-      <h1
-        className="text-5xl text-white"
-        style={{ fontFamily: "'Allura', cursive" }}
-      >
-        Omega
-      </h1>
+        {/* Background split */}
+        <div className="absolute inset-0 flex -z-10">
+          <div className="w-1/2 bg-[#0b1d3a]"></div>
+          <div className="w-1/2 bg-white"></div>
+        </div>
 
-      {/* Menu */}
-      <div className="flex items-center gap-8 text-black font-medium">
-        <a href="#" className="hover:underline">Home</a>
-        <a href="#" className="hover:underline">Watch</a>
-        <a href="#" className="hover:underline">Contact</a>
+        {/* Logo */}
+        <h1
+          className="text-6xl text-white tracking-tight"
+          style={{ fontFamily: "'Allura', cursive" }}
+        >
+          Omega
+        </h1>
 
-        <BsCart3 size={24} className="cursor-pointer" />
-      </div>
+        {/* Menu */}
+        <div className="flex items-center gap-8 text-black font-medium">
+          <a href="#" className="hover:underline">Home</a>
+          <a href="#" className="hover:underline">Watch</a>
+          <a href="#" className="hover:underline">Contact</a>
 
-    </nav>
+          <BsCart3 size={24} className="cursor-pointer" />
+        </div>
+
+      </nav>
+    </>
   );
 }
