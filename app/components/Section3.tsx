@@ -9,16 +9,16 @@ const poppins = Poppins({
 export default function DiscoverSection() {
 
   const items = [
-    { title: "FOR MEN", img: "/D1.avif" },
-    { title: "MECHANICAL", img: "/D2.avif" },
-    { title: "PILOT", img: "/D3.avif" },
-    { title: "FOR WOMEN", img: "/D4.avif" },
-    { title: "GIFT IDEAS", img: "/D5.webp" },
-    { title: "WHITE", img: "/D6.avif" },
+    { title: "MEN", img: "/D1.avif" },
+    { title: "WOMEN", img: "/D2.avif" },
+    { title: "JAZZMASTER", img: "/D3.avif" },
+    { title: "AUTOMATIC", img: "/D4.avif" },
+    { title: "KHAKKI NAVY", img: "/D5.webp" },
+    { title: "PILOT", img: "/D6.avif" },
   ];
 
   return (
-    <section className={`py-16 bg-gray-100 ${poppins.className}`}>
+    <section className={`py-16 ${poppins.className}`}>
       
       {/* Heading */}
       <h2 className="text-center text-2xl tracking-[0.3em] mb-12">
@@ -39,7 +39,7 @@ export default function DiscoverSection() {
             />
 
             {/* Dark overlay */}
-            <div className="absolute inset-0 bg-black/30"></div>
+            <div className="absolute inset-0 bg-black/15"></div>
 
             {/* Text */}
             <div className="absolute bottom-6 left-0 right-0 text-center">
