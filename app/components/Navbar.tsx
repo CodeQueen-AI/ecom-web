@@ -13,8 +13,8 @@ export default function Navbar() {
 
       {/* Logo */}
       <h1
-        className="text-4xl text-white"
-        style={{ fontFamily: "'Allison', cursive" }}
+        className="text-5xl text-white"
+        style={{ fontFamily: "'Allura', cursive" }}
       >
         Omega
       </h1>
@@ -25,7 +25,7 @@ export default function Navbar() {
         <a href="#" className="hover:underline">Watch</a>
         <a href="#" className="hover:underline">Contact</a>
 
-        <BsCart3  size={24} className="cursor-pointer" />
+        <BsCart3 size={24} className="cursor-pointer" />
       </div>
 
     </nav>
