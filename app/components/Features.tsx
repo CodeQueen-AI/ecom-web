@@ -1,5 +1,15 @@
-
 import Image from "next/image";
+import { Poppins, Allura } from "next/font/google";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300","400","500","600","700"],
+});
+
+const allura = Allura({
+  subsets: ["latin"],
+  weight: "400",
+});
 
 export default function Collections() {
 
@@ -19,12 +29,12 @@ export default function Collections() {
   ];
 
   return (
-    <section className="py-20 px-10">
+    <section className={`${poppins.className} py-20 px-10`}>
 
       {/* Heading */}
       <div className="text-center max-w-2xl mx-auto mb-16">
-        <h2 className="text-3xl font-semibold tracking-wide">
-          EXPLORE OUR COLLECTIONS
+        <h2 className="text-4xl">
+          Explore Our <span  className={`${allura.className} text-5xl tracking-wide`}>Collections</span>
         </h2>
 
         <p className="text-gray-600 mt-5 text-sm leading-relaxed">
