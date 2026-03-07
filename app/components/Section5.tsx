@@ -1,46 +1,117 @@
+// "use client";
+// import Image from "next/image";
+
+// export default function WatchSection() {
+//   return (
+//     <section className="w-full flex h-screen">
+
+//       {/* LEFT IMAGE */}
+//       <div className="w-1/2 relative">
+//         <Image
+//           src="/Img11.webp"
+//           alt="Casio Watch"
+//           fill
+//           className="object-cover"
+//         />
+//       </div>
+
+//       {/* RIGHT IMAGE WITH TEXT */}
+//       <div className="w-1/2 relative">
+
+//         <Image
+//           src="/Img12.webp"
+//           alt="Edifice Watch"
+//           fill
+//           className="object-cover"
+//         />
+
+//         {/* Overlay Text */}
+//         <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center">
+
+//           <p className="text-lg font-medium">
+//             New collection
+//           </p>
+
+//           <h1 className="text-6xl font-semibold mt-2">
+//             Edifice
+//           </h1>
+
+//           <div className="mt-10 border-t border-white w-80"></div>
+
+//           <p className="mt-4 text-lg">
+//             Shop new collection
+//           </p>
+
+//         </div>
+
+//       </div>
+
+//     </section>
+//   );
+// }
+
+
+
 "use client";
 import Image from "next/image";
 
 export default function WatchSection() {
   return (
-    <section className="w-full flex h-screen">
+    <section className="w-full flex h-screen overflow-hidden">
+
+      {/* Google Font */}
+      <style>
+        {`
+          @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+          .poppins{
+            font-family:'Poppins', sans-serif;
+          }
+        `}
+      </style>
 
       {/* LEFT IMAGE */}
       <div className="w-1/2 relative">
         <Image
           src="/Img11.webp"
-          alt="Casio Watch"
+          alt="watch"
           fill
           className="object-cover"
         />
       </div>
 
-      {/* RIGHT IMAGE WITH TEXT */}
+      {/* RIGHT IMAGE */}
       <div className="w-1/2 relative">
 
         <Image
           src="/Img12.webp"
-          alt="Edifice Watch"
+          alt="watch"
           fill
           className="object-cover"
         />
 
-        {/* Overlay Text */}
-        <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center">
+        {/* TEXT OVERLAY */}
+        <div className="absolute inset-0 flex flex-col justify-between text-white poppins">
 
-          <p className="text-lg font-medium">
-            New collection
-          </p>
+          {/* TOP TEXT */}
+          <div className="text-center pt-16">
+            <p className="text-lg">New collection</p>
 
-          <h1 className="text-6xl font-semibold mt-2">
-            Edifice
-          </h1>
+            <h1 className="text-6xl font-semibold mt-2">
+              Edifice
+            </h1>
+          </div>
 
-          <div className="mt-10 border-t border-white w-80"></div>
+          {/* BOTTOM TEXT */}
+          <div className="text-center pb-16">
 
-          <p className="mt-4 text-lg">
-            Shop new collection
-          </p>
+            <div className="border-t border-white w-80 mx-auto mb-4"></div>
+
+            <p className="text-lg">
+              Shop new collection
+            </p>
+
+          </div>
 
         </div>
 
