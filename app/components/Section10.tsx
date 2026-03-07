@@ -31,9 +31,13 @@ export default function HeroWatch() {
       </nav>
 
       {/* BIG LETTER */}
-      <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[35rem] font-black text-[#8263a3] leading-none">
+      {/* <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[35rem] font-black text-[#8263a3] leading-none">
         S
-      </span>
+      </span> */}
+
+      <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[42rem] font-bold text-[#8263a3]/90 leading-none select-none pointer-events-none">
+  S
+</span>
 
       {/* WATCH IMAGE */}
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
