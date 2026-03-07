@@ -6,7 +6,7 @@ import { GrUndo } from "react-icons/gr";
 
 export default function Features() {
   return (
-    <section className="w-full bg-gray-100 py-16">
+    <section className="w-full py-16">
       {/* Google Font */}
       <style>
         {`

@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function SeasonCollection() {
   return (
-    <section className="w-full bg-gray-100 py-20">
+    <section className="w-full py-20">
 
       {/* Google Fonts */}
       <style>
