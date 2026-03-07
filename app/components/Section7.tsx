@@ -1,15 +1,23 @@
 "use client";
 
-import { FaTruck } from "react-icons/fa";
-import { FaTag } from "react-icons/fa";
-import { FaUndo } from "react-icons/fa";
-import { FaStar } from "react-icons/fa";
+import { FaTruck, FaTag, FaUndo, FaStar } from "react-icons/fa";
 
 export default function Features() {
   return (
     <section className="w-full bg-gray-100 py-16">
 
-      <div className="max-w-7xl mx-auto grid grid-cols-4 text-center gap-10 px-6">
+      {/* Google Font */}
+      <style>
+        {`
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        .poppins{
+          font-family:'Poppins', sans-serif;
+        }
+        `}
+      </style>
+
+      <div className="max-w-7xl mx-auto grid grid-cols-4 text-center gap-12 px-6 poppins">
 
         {/* Feature 1 */}
         <div>
