@@ -5,12 +5,12 @@ import { Poppins } from "next/font/google";
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["300","400","500","600","700"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export default function HeroWatch() {
   return (
-    <div className={`${poppins.className} relative min-h-screen overflow-hidden`}>
+    <div className={`${poppins.className} relative h-screen overflow-hidden`}>
 
       {/* LEFT BG */}
       <div className="absolute left-0 top-0 w-1/2 h-full bg-[#dbdce0]" />
@@ -35,7 +35,7 @@ export default function HeroWatch() {
       </div>
 
       {/* TEXT LEFT */}
-      <h1 className="absolute left-1/2 top-1/2 text-[5rem] tracking-[25px] text-white -translate-y-1/2 -translate-x-[380px]">
+      <h1 className={`${poppins.className} absolute left-1/2 top-1/2 text-[5rem] tracking-[25px] text-white -translate-y-1/2 -translate-x-[380px]`}>
         POR
       </h1>
 
@@ -45,51 +45,45 @@ export default function HeroWatch() {
       </h1>
 
       {/* EXPLORE BUTTON */}
-      <button className="absolute left-1/2 top-1/2 translate-y-[230px] -translate-x-1/2 bg-white px-8 py-4 font-semibold shadow-xl">
+      <button className="absolute left-1/2 top-1/2 -translate-x-1/2 translate-y-[200px] bg-white px-8 py-4 font-semibold shadow-xl hover:bg-gray-200 transition cursor-pointer">
         EXPLORE MORE
       </button>
 
       {/* PRINT BUTTON */}
-      <button className="absolute right-0 top-1/2 rotate-90 border border-white text-white px-8 py-3">
+      <button className="absolute right-0 top-1/2 rotate-90 border border-white text-white px-8 py-3 hover:bg-white hover:text-black transition cursor-pointer">
         PRINT
       </button>
 
       {/* CATALOG BUTTON */}
-      <button className="absolute left-0 top-[25%] -rotate-90 border border-[#232637] text-[#232637] px-8 py-3">
+      <button className="absolute left-0 top-[25%] -rotate-90 border border-[#232637] text-[#232637] px-8 py-3 hover:bg-[#09162c] hover:text-white transition cursor-pointer">
         CATALOG
       </button>
 
       {/* FEATURES */}
-      <h4 className="absolute left-[18%] top-[32%] text-[#232637]">
-        Diesel
-      </h4>
 
-      <h4 className="absolute right-[18%] top-[32%] text-white">
-        Watches
-      </h4>
+      {/* Diesel */}
+      <div className="absolute left-[12%] top-[32%] flex items-center gap-6 text-[#232637]">
+        <span>Diesel</span>
+        <div className="w-[100px] h-[1px] bg-[#232637]" />
+      </div>
 
-      <h4 className="absolute left-[18%] bottom-[32%] text-[#232637]">
-        Tough
-      </h4>
+      {/* Watches */}
+      <div className="absolute right-[12%] top-[32%] flex items-center gap-6 text-white">
+        <div className="w-[100px] h-[1px] bg-white" />
+        <span>Watches</span>
+      </div>
 
-      <h4 className="absolute right-[18%] bottom-[32%] text-white">
-        Modern
-      </h4>
+      {/* Tough */}
+      <div className="absolute left-[12%] bottom-[32%] flex items-center gap-6 text-[#232637]">
+        <span>Tough</span>
+        <div className="w-[100px] h-[1px] bg-[#232637]" />
+      </div>
 
-      {/* FOOTER */}
-      <footer className="absolute bottom-6 w-full flex justify-between px-8">
-
-        <p className="text-[#232637] text-sm">
-          Copyright © 2024 Web Design Mastery. All rights reserved.
-        </p>
-
-        <div className="flex gap-8 text-white text-sm">
-          <span>Facebook</span>
-          <span>Instagram</span>
-          <span>Twitter</span>
-        </div>
-
-      </footer>
+      {/* Modern */}
+      <div className="absolute right-[12%] bottom-[32%] flex items-center gap-6 text-white">
+        <div className="w-[100px] h-[1px] bg-white" />
+        <span>Modern</span>
+      </div>
 
     </div>
   );
