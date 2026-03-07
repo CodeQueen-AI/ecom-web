@@ -26,27 +26,27 @@ export default function SmartWatchSection() {
       </div>
 
       {/* Right Side - Text */}
-      <div className="w-full md:w-1/2 flex flex-col justify-center items-start px-8 md:px-16 py-12 text-white">
-        {/* Smart Watch Title */}
-        <h1 className="text-7xl mb-6" style={{ fontFamily: "Allura, cursive" }}>
-          Smart Watch
-        </h1>
+      <div className="w-full md:w-1/2 flex flex-col justify-center items-center px-8 md:px-16 py-12 text-white">
+  {/* Smart Watch Title */}
+  <h1 className="text-7xl mb-6" style={{ fontFamily: "Allura, cursive" }}>
+    Smart Watch
+  </h1>
 
-        {/* Paragraph */}
-        <p className="text-lg font-extralight mb-8" style={{ fontFamily: "Poppins, sans-serif" }}>
-          Experience the perfect blend of style and technology with this smart watch 
-          Track your fitness stay connected and elevate your everyday look effortlessly.
-          Designed for comfort and performance
-        </p>
+  {/* Paragraph */}
+  <p className="text-lg font-extralight mb-8 text-center" style={{ fontFamily: "Poppins, sans-serif" }}>
+    Experience the perfect blend of style and technology with this smart watch
+    Track your fitness stay connected and elevate your everyday look effortlessly
+    Designed for comfort and performance
+  </p>
 
-        {/* Buy Button */}
-        <button
-          className="bg-white text-[#09162c] border border-[#09162c] px-10 py-4 text-lg hover:bg-[#09162c] hover:text-white hover:border-white transition cursor-pointer"
-          style={{ fontFamily: "Poppins, sans-serif" }}
-        >
-          Add To Cart
-        </button>
-      </div>
+  {/* Centered Button */}
+  <button
+    className="bg-white text-[#09162c] border border-[#09162c] px-10 py-4 text-lg hover:bg-[#09162c] hover:text-white hover:border-white transition cursor-pointer"
+    style={{ fontFamily: "Poppins, sans-serif" }}
+  >
+    Add To Cart
+  </button>
+</div>
     </div>
   );
 }
