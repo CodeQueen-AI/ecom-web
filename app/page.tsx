@@ -11,6 +11,7 @@ import Section7 from './components/Section7'
 import Section8 from './components/Section8'
 import Section9 from './components/Section9'
 import Section10 from './components/Section10'
+import Section11 from './components/Section11'
 export default function Page() {
   return (
     <div>
@@ -27,6 +28,7 @@ export default function Page() {
     <Section8/>
     <Section9/>
      <Section10/>
+     <Section11/>
     </div>
   );
 }

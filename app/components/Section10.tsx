@@ -13,7 +13,7 @@ export default function HeroWatch() {
     <div className={`${poppins.className} relative h-screen overflow-hidden`}>
 
       {/* LEFT BG */}
-      <div className="absolute left-0 top-0 w-1/2 h-full bg-[#dbdce0]" />
+      <div className="absolute left-0 top-0 w-1/2 h-full bg-[#e7e8ec]" />
 
       {/* RIGHT BG */}
       <div className="absolute right-0 top-0 w-1/2 h-full bg-[#09162c]" />
