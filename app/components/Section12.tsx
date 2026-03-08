@@ -27,7 +27,7 @@ export default function WatchBanner() {
           <p className="text-2xl font-semibold mb-6">
             $ 3,899
           </p>
-          <button className="bg-white px-8 py-4 text-black text-lg hover:bg-[#08121d] transition">
+          <button className="bg-white px-8 py-4 text-black text-lg hover:bg-[#08121d] hover:text-white transition cursor-pointer">
             Order Now
           </button>
         </div>
