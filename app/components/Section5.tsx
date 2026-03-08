@@ -1,127 +1,94 @@
-// "use client";
-// import Image from "next/image";
-
-// export default function WatchSection() {
-//   return (
-//     <section className="w-full flex h-screen">
-
-//       {/* LEFT IMAGE */}
-//       <div className="w-1/2 relative">
-//         <Image
-//           src="/Img11.webp"
-//           alt="Casio Watch"
-//           fill
-//           className="object-cover"
-//         />
-//       </div>
-
-//       {/* RIGHT IMAGE WITH TEXT */}
-//       <div className="w-1/2 relative">
-
-//         <Image
-//           src="/Img12.webp"
-//           alt="Edifice Watch"
-//           fill
-//           className="object-cover"
-//         />
-
-//         {/* Overlay Text */}
-//         <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center">
-
-//           <p className="text-lg font-medium">
-//             New collection
-//           </p>
-
-//           <h1 className="text-6xl font-semibold mt-2">
-//             Edifice
-//           </h1>
-
-//           <div className="mt-10 border-t border-white w-80"></div>
-
-//           <p className="mt-4 text-lg">
-//             Shop new collection
-//           </p>
-
-//         </div>
-
-//       </div>
-
-//     </section>
-//   );
-// }
-
-
-
 "use client";
 import Image from "next/image";
 
-export default function WatchSection() {
+export default function SeasonCollection() {
   return (
-    <section className="w-full flex h-screen overflow-hidden">
+    <section className="w-full py-20">
 
-      {/* Google Font */}
+      {/* Google Fonts */}
       <style>
         {`
-          @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Allura&display=swap');
 
-          .poppins{
-            font-family:'Poppins', sans-serif;
-          }
+        .poppins{
+          font-family:'Poppins', sans-serif;
+        }
+
+        .allura{
+          font-family:'Allura', cursive;
+        }
         `}
       </style>
 
-      {/* LEFT IMAGE */}
-      <div className="w-1/2 relative">
-        <Image
-          src="/Img11.webp"
-          alt="watch"
-          fill
-          className="object-cover"
-        />
-      </div>
+      <div className="max-w-7xl mx-auto poppins px-6">
 
-      {/* RIGHT IMAGE */}
-      <div className="w-1/2 relative">
+        {/* Heading */}
+        <h1 className="text-4xl text-center mb-16">
+          <span className="allura text-5xl">Season Collection</span>
+        </h1>
 
-        <Image
-          src="/Img12.webp"
-          alt="watch"
-          fill
-          className="object-cover"
-        />
+        {/* Watches Grid */}
+        <div className="grid grid-cols-3 gap-12">
 
-        {/* TEXT OVERLAY */}
-        <div className="absolute inset-0 flex flex-col justify-between text-white poppins">
+          {/* Watch 1 */}
+          <div>
+            <div className="relative w-full h-[420px]">
+              <Image
+                src="/watch4.webp"
+                alt="Kenneth Cole"
+                fill
+                className="object-cover"
+              />
+            </div>
 
-          {/* TOP TEXT */}
-          <div className="text-center pt-5">
-            <p className="text-lg">New collection</p>
+            <h2 className="text-2xl mt-6">
+              Kenneth Cole New York
+            </h2>
 
-            <h1 className="text-4xl font-extralight mt-2">
-              Edifice
-            </h1>
+            <button className="mt-6 border border-gray-400 px-6 py-2 hover:bg-black hover:text-white transition cursor-pointer">
+              Shop Now
+            </button>
           </div>
 
-          {/* BOTTOM TEXT */}
-          {/* <div className="pb-10">
+          {/* Watch 2 */}
+          <div>
+            <div className="relative w-full h-[420px]">
+              <Image
+                src="/watch5.webp"
+                alt="Lee Cooper"
+                fill
+                className="object-cover"
+              />
+            </div>
 
-            <div className="border-t border-white w-80 mx-auto mb-20"></div>
+            <h2 className="text-2xl mt-6">
+              Lee Cooper
+            </h2>
 
-            <p className="text-lg">
-              Shop new collection
-            </p>
+            <button className="mt-6 border border-gray-400 px-6 py-2 hover:bg-black hover:text-white transition cursor-pointer">
+              Shop Now
+            </button>
+          </div>
 
-          </div> */}
+          {/* Watch 3 */}
+          <div>
+            <div className="relative w-full h-[420px]">
+              <Image
+                src="/watch6.webp"
+                alt="Edifice"
+                fill
+                className="object-cover"
+              />
+            </div>
 
-          <div className="pb-10 pt-20">
+            <h2 className="text-2xl mt-6">
+              Edifice
+            </h2>
 
-  <div className="border-t border-white w-[90%] ml-10 mb-4"></div>
-
-  <p className="text-lg ml-10">
-    Shop new collection
-  </p>
-
-</div>
+            <button className="mt-6 border border-gray-400 px-6 py-2 hover:bg-black hover:text-white transition cursor-pointer">
+              Shop Now
+            </button>
+          </div>
 
         </div>
 
@@ -130,3 +97,11 @@ export default function WatchSection() {
     </section>
   );
 }
+
+
+
+
+
+
+
+
