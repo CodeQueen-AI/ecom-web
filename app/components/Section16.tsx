@@ -1,57 +1,60 @@
-import Image from "next/image";
-import { Poppins } from "next/font/google";
+"use client";
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["300","400","500","600","700"],
-});
-
-export default function OurStory() {
+export default function Hero() {
   return (
-    <section className={`w-full bg-[#f3f3f3] py-20 ${poppins.className}`}>
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 items-center gap-16 px-6 relative">
+    <section className="w-full overflow-hidden">
+      {/* Import fonts directly */}
+      <style>
+        {`
+          @import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
+          @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+        `}
+      </style>
 
-        {/* Left Side */}
-        <div className="relative flex justify-center">
+      <div className="max-w-9xl mx-auto px-6 py-12 relative">
 
-          {/* Orange background shape */}
-          <div className="absolute -bottom-20 -left-20 w-[300px] h-[250px] bg-[#f3a85b] -z-10"></div>
-
-          {/* Watch Image */}
-          <Image
-            src="/watch2.png"
-            alt="watch"
-            width={500}
-            height={500}
-            className="object-contain"
-          />
+        {/* Top Text */}
+        <div className="flex items-center gap-6">
+          <h1 className="text-[110px] leading-[0.9] flex items-center font-extralight ml-24">
+            Express
+            <span className="text-orange-500 mx-4"> — </span>
+            <span style={{ fontFamily: "'Allura', cursive" }}>Yourself</span>
+          </h1>
         </div>
 
-        {/* Right Content */}
-        <div className="space-y-6">
+        {/* Bottom Text with Center Paragraph */}
+        <div className="flex items-center justify-between mt-6 w-full max-w-5xl mx-auto">
+          {/* Left */}
+          <h1 className="text-[120px] font-extralight leading-none ml-[-20px]" style={{ fontFamily: "'Allura', cursive" }}>
+            Through
+          </h1>
 
-          <div className="flex items-center gap-3">
-            <span className="w-12 h-[2px] bg-[#f3a85b]"></span>
-            <p className="text-gray-600 tracking-widest uppercase">
-              Our Story
-            </p>
-          </div>
-
-          <h2 className="text-5xl font-semibold text-gray-800 leading-tight">
-            Inspirational Watch Of This Year
-          </h2>
-
-          <p className="text-gray-500 text-lg leading-relaxed max-w-lg">
-            Each timepiece featured in this collection embodies the pinnacle
-            of horological artistry, blending cutting-edge design with
-            unparalleled functionality.
+          {/* Center Paragraph */}
+          <p
+            className="text-center max-w-sm text-base leading-relaxed font-extralight line-clamp-3"
+            style={{ fontFamily: "'Poppins', sans-serif" }}>
+            Explore our stylish shoes and accessories quality, comfort and trend all in one place
           </p>
 
-          <button className="bg-[#2f2b2b] text-white px-8 py-4 tracking-wider hover:bg-black transition">
-            DISCOVER
-          </button>
-
+          {/* Right */}
+          <h1 className="text-[120px] font-extralight leading-none mr-[-20px]">
+            Style<span className="text-orange-500">.</span>
+          </h1>
         </div>
+
+        {/* Bottom Image Section */}
+        <div className="mt-12 flex justify-center">
+          <div className="flex items-center justify-center overflow-hidden">
+            <img
+              src="/stylewatch.png" // Replace with your image path
+              alt="Stylish Shoes"
+            //   className="w-full h-full object-cover rounded-[120px]"
+            width={500}
+            height={300}
+            />
+          </div>
+        </div>
+
       </div>
     </section>
   );
