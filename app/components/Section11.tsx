@@ -5,7 +5,7 @@ export default function WatchSection() {
       <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
         <div>
           <Image
-            src="/watch20.jpg"
+            src="/Imges/Img9.jpg"
             alt="watch"
             width={400}
             height={200}/>
@@ -13,7 +13,7 @@ export default function WatchSection() {
         <div className="space-y-6">
           <h1 className="text-5xl font-semibold leading-tight">
             A Watch As <br />
-            <span className="allura text-6xl">
+            <span className="allura text-6xl font-extralight">
               Unique
             </span>{" "}
             As You
