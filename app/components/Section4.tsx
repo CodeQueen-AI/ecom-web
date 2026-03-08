@@ -6,7 +6,7 @@ export default function Hero() {
     <section className="w-full min-h-screen flex overflow-hidden">
       <div className="w-1/2 relative">
         <Image
-          src="/Img5.avif"
+          src="/Imges/Img5.avif"
           alt="watch"
           fill
           className="object-cover"/>
