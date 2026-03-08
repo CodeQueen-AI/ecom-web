@@ -46,11 +46,11 @@ export default function Hero() {
         <div className="mt-12 flex justify-center">
           <div className="flex items-center justify-center overflow-hidden">
             <img
-              src="/Home.PNG" // Replace with your image path
+              src="/stylewatch.png" // Replace with your image path
               alt="Stylish Shoes"
             //   className="w-full h-full object-cover rounded-[120px]"
-            width={1000}
-            height={800}
+            width={500}
+            height={300}
             />
           </div>
         </div>
