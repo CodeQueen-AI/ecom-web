@@ -3,64 +3,41 @@ import { BsCart3 } from "react-icons/bs";
 
 export default function Page() {
   return (
-    <>
-      <style>
-        {`
-        @import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+    <nav className="w-full flex items-center justify-between px-10 py-6 relative">
 
-        .nav-link{
-          position: relative;
-        }
+      {/* Background split */}
+      <div className="absolute inset-0 flex -z-10">
+        <div className="w-1/2 bg-[#09162c]"></div>
+        <div className="w-1/2 bg-white"></div>
+      </div>
 
-        .nav-link::after{
-          content: "";
-          position: absolute;
-          left: 0;
-          bottom: -4px;
-          width: 0%;
-          height: 2px;
-          background: black;
-          transition: width 0.35s ease;
-        }
+      {/* Logo */}
+      <h1 className="text-5xl text-white tracking-tight allura">
+        Omega
+      </h1>
 
-        .nav-link:hover::after{
-          width: 100%;
-        }
-        `}
-      </style>
+      {/* Menu */}
+      <div className="flex items-center gap-8 text-black font-medium poppins">
 
-      <nav className="w-full flex items-center justify-between px-10 py-6 relative">
+        {/* Nav Link */}
+        <a className="relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-black after:transition-all after:duration-300 hover:after:w-full">
+          HOME
+        </a>
 
-        {/* Background split */}
-        <div className="absolute inset-0 flex -z-10">
-          {/* <div className="w-1/2 bg-[#0b1d3a]"></div> */}
-            <div className="w-1/2 bg-[#09162c]"></div>
-          <div className="w-1/2 bg-white"></div>
-        </div>
+        <a className="relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-black after:transition-all after:duration-300 hover:after:w-full">
+          COLLECTIONS
+        </a>
 
-        {/* Logo */}
-        <h1
-          className="text-5xl text-white tracking-tight allura"
-          
-        >
-          Omega
-        </h1>
+        <a className="relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-black after:transition-all after:duration-300 hover:after:w-full">
+          SERVICES
+        </a>
 
-        {/* Menu */}
-        <div
-          className="flex items-center gap-8 text-black font-medium"
-          style={{ fontFamily: "'Poppins', sans-serif" }}
-        >
-          <a href="#" className="nav-link">HOME</a>
-          <a href="#" className="nav-link">COLLECTIONS</a>
-          <a href="#" className="nav-link">SERVICES</a>
-          <a href="#" className="nav-link mr-10">CONTACT</a>
+        <a className="relative mr-10 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-black after:transition-all after:duration-300 hover:after:w-full">
+          CONTACT
+        </a>
 
-          <BsCart3 size={24} className="cursor-pointer" />
-        </div>
-
-      </nav>
-    </>
+        <BsCart3 size={24} className="cursor-pointer" />
+      </div>
+    </nav>
   );
 }
