@@ -9,44 +9,43 @@ const poppins = Poppins({
 
 export default function Collection() {
   return (
-    <section id="Collection" className={`${poppins.className} py-20`}>
-      
-      {/* Heading */}
-      <h1 className="text-center text-4xl font-semibold mb-10">
+    <section className={`${poppins.className} py-20`}>
+
+      <h1 className="text-center text-4xl font-semibold mb-12">
         Collection
       </h1>
 
-      {/* Grid Container */}
-      <div className="w-[60%] h-[80vh] mx-auto grid grid-cols-3 gap-5 auto-rows-[15rem]">
+      <div className="w-[70%] mx-auto grid grid-cols-3 gap-5">
 
-        {/* Card 1 */}
-        <div className="relative row-span-3 bg-[url('/rado-watch.jpg')] bg-cover bg-center group">
-          <Overlay name="Rado"/>
+        {/* Column 1 */}
+        <div className="relative h-[450px] bg-[url('/rado.jpg')] bg-cover bg-center group">
+          <Overlay name="Rado" />
         </div>
 
-        {/* Card 2 */}
-        <div className="relative bg-[url('/geneve-watch.jpg')] bg-cover bg-center group">
-          <Overlay name="Geneve"/>
+        {/* Column 2 */}
+        <div className="flex flex-col gap-5">
+          <div className="relative h-[215px] bg-[url('/Tissot.jpg')] bg-cover bg-center group">
+            <Overlay name="Tissot" />
+          </div>
+
+          <div className="relative h-[215px] bg-[url('/cartier.jpg')] bg-cover bg-center group">
+            <Overlay name="Cartier" />
+          </div>
         </div>
 
-        {/* Card 3 */}
-        <div className="relative row-span-2 bg-[url('/tissot-watch.jpg')] bg-cover bg-center group">
-          <Overlay name="Tissot"/>
-        </div>
+        {/* Column 3 */}
+        <div className="flex flex-col gap-5">
+          <div className="relative h-[140px] bg-[url('/geneve.jpg')] bg-cover bg-center group">
+            <Overlay name="Geneve" />
+          </div>
 
-        {/* Card 4 */}
-        <div className="relative bg-[url('/cartier-watch.jpg')] bg-cover bg-center group">
-          <Overlay name="Cartier"/>
-        </div>
+          <div className="relative h-[140px] bg-[url('/omega.jpg')] bg-cover bg-center group">
+            <Overlay name="Omega" />
+          </div>
 
-        {/* Card 5 */}
-        <div className="relative bg-[url('/omega-watch.jpg')] bg-cover bg-center group">
-          <Overlay name="Omega"/>
-        </div>
-
-        {/* Card 6 */}
-        <div className="relative bg-[url('/fitron-watch.jpg')] bg-cover bg-center group">
-          <Overlay name="Fitron"/>
+          <div className="relative h-[140px] bg-[url('/Fitron.jpg')] bg-cover bg-center group">
+            <Overlay name="Fitron" />
+          </div>
         </div>
 
       </div>
@@ -54,16 +53,13 @@ export default function Collection() {
   );
 }
 
-/* Overlay Component */
 function Overlay({ name }: { name: string }) {
   return (
     <>
-      {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/50 scale-x-0 origin-right transition-transform duration-700 group-hover:scale-x-100 group-hover:origin-left"></div>
 
-      {/* Label */}
       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-700">
-        <span className="bg-[#e8cfa8] px-6 py-3 uppercase text-sm font-medium text-white">
+        <span className="bg-[#e8cfa8] px-6 py-3 uppercase text-sm text-white">
           {name}
         </span>
       </div>
