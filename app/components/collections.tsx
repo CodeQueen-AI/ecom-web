@@ -19,7 +19,7 @@ export default function Collections() {
     <section className="py-20 px-10 poppins">
       <div className="text-center max-w-2xl mx-auto mb-16">
         <h2 className="text-4xl">
-          Explore Our <span  className="text-5xl tracking-wide alura">Collections</span>
+          Explore Our <span  className="text-5xl tracking-wide allura">Collections</span>
         </h2>
         <p className="text-gray-700 mt-5 text-sm leading-relaxed">
           Our watch collection showcases a perfect blend of timeless design and modern craftsmanship

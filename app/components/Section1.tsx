@@ -1,32 +1,23 @@
 import Image from "next/image";
-import { Poppins } from "next/font/google";
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["300","400","500","600","700"],
-});
 
 export default function WatchSection() {
   const products = [
-    { name: "Tatum", price: "Rs.131,596.80", img: "/Img5.webp" },
-    { name: "Theo", price: "Rs.43,078.77", img: "/Img6.webp" },
-    { name: "Xavier", price: "Rs.88,321.32", img: "/Img7.webp" },
-    { name: "Pro-mariner", price: "Rs.302,731.64", img: "/Img8.webp" },
+    { name: "Tatum", price: "Rs.131,596.80", img: "/watch/watch4.webp" },
+    { name: "Theo", price: "Rs.43,078.77", img: "/watch/watch5.webp" },
+    { name: "Xavier", price: "Rs.88,321.32", img: "/watch/watch6.webp" },
+    { name: "Pro-mariner", price: "Rs.302,731.64", img: "/watch/watch7.webp" },
   ];
 
   return (
-    <section className={`py-12 ${poppins.className}`}>
+    <section className="py-12 poppins">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center px-6">
-
-        {/* Left Image */}
         <div className="relative">
           <Image
             src="/Img4.jpg"
             alt="watch"
             width={700}
             height={600}
-            className="w-full object-cover"
-          />
+            className="w-full object-cover"/>
 
           <button className="absolute bottom-6 left-1/2 -translate-x-1/2 border border-black px-6 py-2 text-sm hover:bg-black hover:text-white transition">
             The Aviator Watch
@@ -42,8 +33,7 @@ export default function WatchSection() {
                 alt={item.name}
                 width={150}
                 height={150}
-                className="mx-auto"
-              />
+                className="mx-auto"/>
 
               <h3 className="mt-3 text-sm font-medium">{item.name}</h3>
               <p className="text-xs text-gray-600 mt-1">{item.price}</p>
