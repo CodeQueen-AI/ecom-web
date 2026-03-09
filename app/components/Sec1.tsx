@@ -59,11 +59,3 @@ export default function SeasonCollection() {
     </section>
   );
 }
-
-
-
-
-
-
-
-
