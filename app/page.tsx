@@ -31,7 +31,7 @@ export default function Page() {
     <Sec7/>
     <Sec8/>
     <Sec9/>
-    <Sec10/>
+    {/* <Sec10/> */}
     <Section1/>
     <Section2/>
     <Section9/>
