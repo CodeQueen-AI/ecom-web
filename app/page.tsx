@@ -32,7 +32,7 @@ export default function Page() {
     <Sec9/>
     <Sec10/>
     <Sec11/>
-    <Sec11/>
+    <Sec12/>
     <Section9/>
     <Section11/>
     <Section13/>
