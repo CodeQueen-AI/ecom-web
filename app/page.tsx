@@ -12,9 +12,9 @@ import Sec9 from './components/Sec9'
 import Sec10 from './components/Sec10'
 import Sec11 from './components/Sec11'
 import Sec12 from './components/Sec12'
-import Section9 from './components/Section9'
-import Section11 from './components/Section11'
-import Section13 from './components/Section13'
+import Sec13 from './components/Sec13'
+import Sec14 from './components/Sec14'
+import Sec15 from './components/Sec15'
 import Footer from './components/footer'
 export default function Page() {
   return (
@@ -33,9 +33,9 @@ export default function Page() {
     <Sec10/>
     <Sec11/>
     <Sec12/>
-    <Section9/>
-    <Section11/>
-    <Section13/>
+    <Sec13/>
+    <Sec14/>
+    <Sec15/>
     <Footer/>
     </div>
   );
