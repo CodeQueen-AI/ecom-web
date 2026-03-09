@@ -12,8 +12,6 @@ import Sec9 from './components/Sec9'
 import Sec10 from './components/Sec10'
 import Sec11 from './components/Sec11'
 import Sec12 from './components/Sec12'
-import Section1 from './components/Section1'
-import Section2 from './components/Section2'
 import Section9 from './components/Section9'
 import Section11 from './components/Section11'
 import Section13 from './components/Section13'
@@ -35,8 +33,6 @@ export default function Page() {
     <Sec10/>
     <Sec11/>
     <Sec11/>
-    <Section1/>
-    <Section2/>
     <Section9/>
     <Section11/>
     <Section13/>
