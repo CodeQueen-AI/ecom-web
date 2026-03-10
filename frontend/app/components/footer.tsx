@@ -8,7 +8,7 @@ export default function Footer() {
     <footer className="w-full bg-[#fffcfc] py-16 px-16 poppins">
       <div className="grid grid-cols-4 gap-16">
         <div>
-          <h2 className="text-3xl font-semibold mb-6">Lets get in touch</h2>
+          <h2 className="text-3xl font-semibold mb-6">Lets get in Touch</h2>
 
           <p className="text-gray-800 mb-6 leading-relaxed">
             Sign up for our newsletter and receive <br />
