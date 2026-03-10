@@ -1,5 +1,5 @@
 "use client";
-
+import { useCart } from "../Context/cartcontext"
 import { BsCart3 } from "react-icons/bs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 export default function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
+    const { cartItems } = useCart();
 
   return (
     <nav className="w-full flex items-center justify-between px-10 py-6 relative">
@@ -54,8 +55,16 @@ export default function Navbar() {
         >
           CONTACT
         </Link>
-
-        <BsCart3 size={24} className="cursor-pointer" />
+{/* 
+        <BsCart3 size={24} className="cursor-pointer" /> */}
+        <Link href="/Cart" className="relative cursor-pointer">
+            <BsCart3 className="text-3xl" />
+            {cartItems.length > 0 && (
+              <span className="absolute -top-1 -right-3 bg-black text-white font-bold rounded-full text-xs px-2 py-1">
+                {cartItems.length}
+              </span>
+            )}
+          </Link>
 
         <Link href="/signup">
           <button

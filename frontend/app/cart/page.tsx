@@ -1,5 +1,4 @@
 "use client";
-import { useEffect } from "react";
 import { FaTrash } from "react-icons/fa";
 import { GoPlus } from "react-icons/go";
 import { FiMinus } from "react-icons/fi";
@@ -11,15 +10,6 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 
 const Cart = () => {
   const { cartItems, removeFromCart, updateItemQuantity } = useCart();
-
-  useEffect(() => {
-    const link = document.createElement("link");
-    link.href =
-      "https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap";
-    link.rel = "stylesheet";
-    document.head.appendChild(link);
-  }, []);
-
   const handleCheckout = async () => {
     try {
       const res = await fetch("/api/checkout", {
