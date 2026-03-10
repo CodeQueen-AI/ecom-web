@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins, Allura } from "next/font/google";
 import "./globals.css";
-import Navbar from './components/Navbar'
-import Footer from './components/footer'
+import Navbar from "./components/Navbar";
+import Footer from "./components/footer";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -24,13 +24,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
-        <Navbar/>
+      <body className={`${poppins.variable} ${allura.variable}`}>
+        <Navbar />
         {children}
-        <Footer/>
+        <Footer />
       </body>
     </html>
   );
 }
-
-
