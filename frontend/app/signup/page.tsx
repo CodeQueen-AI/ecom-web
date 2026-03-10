@@ -1,20 +1,21 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
-export default function SignupPage() {
 
+export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <section className="w-full min-h-screen flex poppins">
 
       {/* Left Side Form */}
-      <div className="w-1/2 flex items-center justify-center bg-white">
-        <div className="w-[70%]">
+      <div className="w-1/2 flex flex-col justify-center bg-white px-16">
+     
+
+        <div className="w-full">
 
           <h1 className="text-4xl mb-10 font-semibold">
             Create Your Account
@@ -41,13 +42,10 @@ export default function SignupPage() {
           {/* Password */}
           <div className="mb-10 relative">
             <label className="text-sm">Password</label>
-
             <input
               type={showPassword ? "text" : "password"}
               className="w-full border-b border-black outline-none py-2 pr-8"
             />
-
-            {/* Eye Icon */}
             <span
               onClick={() => setShowPassword(!showPassword)}
               className="absolute right-0 bottom-3 cursor-pointer text-lg"
@@ -56,7 +54,7 @@ export default function SignupPage() {
             </span>
           </div>
 
-          {/* Button Center */}
+          {/* Button */}
           <div className="flex justify-center">
             <button className="w-48 bg-black text-white border border-white py-3 hover:bg-white hover:text-black hover:border-black transition cursor-pointer">
               Sign Up
