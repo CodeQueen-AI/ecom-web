@@ -3,116 +3,193 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { FiFilter, FiPlus, FiX } from "react-icons/fi"; // added FiX for close icon
+import { FiFilter, FiPlus, FiX, FiMinus } from "react-icons/fi";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
-const products = [
-  { id: 1, name: "Black Leather", price: "$250", img: "/products/p1.jpg" },
-  { id: 2, name: "Rose Gold", price: "$350", img: "/products/p2.jpg" },
-  { id: 3, name: "White Dial", price: "$200", img: "/products/p3.jpg" },
-  { id: 4, name: "Silver Chrono", price: "$450", img: "/products/p4.jpg" },
-  { id: 5, name: "Rose Slim", price: "$350", img: "/products/p5.jpg" },
-  { id: 6, name: "Black Steel", price: "$450", img: "/products/p6.jpg" },
+const productsData = [
+  { id: 1, name: "Black Leather", brand: "Rolex", price: 250, strap: "Leather", category: "Luxury", gender: "Men", img: "/products/p1.jpg" },
+  { id: 2, name: "Rose Gold", brand: "Casio", price: 350, strap: "Metal", category: "Classic", gender: "Women", img: "/products/p2.jpg" },
+  { id: 3, name: "White Dial", brand: "Fossil", price: 200, strap: "Silicone", category: "Sport", gender: "Men", img: "/products/p3.jpg" },
+  { id: 4, name: "Silver Chrono", brand: "Seiko", price: 450, strap: "Metal", category: "Smart Watch", gender: "Women", img: "/products/p4.jpg" },
+  { id: 5, name: "Rose Slim", brand: "Casio", price: 350, strap: "Leather", category: "Classic", gender: "Women", img: "/products/p5.jpg" },
+  { id: 6, name: "Black Steel", brand: "Rolex", price: 450, strap: "Metal", category: "Luxury", gender: "Men", img: "/products/p6.jpg" },
 ];
+
+const filterOptions = {
+  Brands: ["Rolex", "Casio", "Fossil", "Seiko"],
+  Price: ["$100–$200", "$201–$350", "$351–$500", "$501+"],
+  "Strap Type": ["Leather", "Metal", "Silicone", "Nylon"],
+  "Category / Style": ["Luxury", "Classic", "Sport", "Smart Watch"],
+  Gender: ["Men", "Women"],
+};
 
 export default function ProductsPage() {
   const [openFilter, setOpenFilter] = useState(false);
+  const [expanded, setExpanded] = useState({});
+  const [selectedFilters, setSelectedFilters] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState(productsData);
+
+  // Expand/collapse category
+  const toggleExpand = (category) => {
+    setExpanded({ ...expanded, [category]: !expanded[category] });
+  };
+
+  // Toggle selection for a filter (does NOT filter products yet)
+  const toggleFilter = (category, value) => {
+    let updatedFilters = [...selectedFilters];
+    const exists = updatedFilters.find(f => f.category === category && f.value === value);
+
+    if (exists) {
+      updatedFilters = updatedFilters.filter(f => f !== exists);
+    } else {
+      // Only one selection per category
+      updatedFilters = [...updatedFilters.filter(f => f.category !== category), { category, value }];
+    }
+
+    setSelectedFilters(updatedFilters);
+  };
+
+  const removeFilter = (filter) => {
+    setSelectedFilters(selectedFilters.filter(f => f !== filter));
+  };
+
+  const clearAllFilters = () => {
+    setSelectedFilters([]);
+    setFilteredProducts(productsData);
+  };
+
+  // APPLY button → filter products and close sidebar
+  const applyFilters = () => {
+    let filtered = productsData;
+
+    selectedFilters.forEach(f => {
+      switch(f.category) {
+        case "Brands":
+          filtered = filtered.filter(p => p.brand === f.value);
+          break;
+        case "Price":
+          switch(f.value) {
+            case "$100–$200": filtered = filtered.filter(p => p.price >= 100 && p.price <= 200); break;
+            case "$201–$350": filtered = filtered.filter(p => p.price >= 201 && p.price <= 350); break;
+            case "$351–$500": filtered = filtered.filter(p => p.price >= 351 && p.price <= 500); break;
+            case "$501+": filtered = filtered.filter(p => p.price >= 501); break;
+          }
+          break;
+        case "Strap Type": filtered = filtered.filter(p => p.strap === f.value); break;
+        case "Category / Style": filtered = filtered.filter(p => p.category === f.value); break;
+        case "Gender": filtered = filtered.filter(p => p.gender === f.value); break;
+      }
+    });
+
+    setFilteredProducts(filtered);
+    setOpenFilter(false); // close sidebar
+  };
 
   return (
     <section className="w-full min-h-screen px-12 py-12">
-
-      {/* Heading Center */}
-      <h1 className="text-4xl font-semibold text-center mb-12">
-        Our Products
-      </h1>
+      <h1 className="text-4xl font-semibold text-center mb-12">Our Products</h1>
 
       {/* Filter Button */}
-      <div
-        onClick={() => setOpenFilter(!openFilter)}
-        className="flex items-center gap-2 cursor-pointer mb-10"
-      >
+      <div onClick={() => setOpenFilter(!openFilter)} className="flex items-center gap-2 cursor-pointer mb-10">
         <FiFilter size={22} />
         <span className="text-lg font-semibold">Filters</span>
       </div>
 
       <div className="flex gap-10">
-
         {/* Sidebar */}
-<div
-  className={`transition-all duration-500 overflow-hidden ${
-    openFilter ? "w-72" : "w-0"
-  }`}
->
-  <div className="border p-6 bg-white">
+        <div className={`transition-all duration-500 overflow-hidden ${openFilter ? "w-80" : "w-0"}`}>
+          <div className={`border p-6 bg-white relative ${openFilter ? "max-h-[1000px]" : "max-h-0"} transition-all duration-500`}>
+            {/* Clear All & Close */}
+            <div className="flex justify-between items-center mb-4">
+              <p className="text-sm text-gray-400 cursor-pointer hover:underline" onClick={clearAllFilters}>Clear All Filters</p>
+              <button onClick={() => setOpenFilter(false)} className="text-gray-500"><FiX size={20} /></button>
+            </div>
 
-    {/* Top Row: Clear Filters + Close Icon */}
-    <div className="flex justify-between items-center mb-6">
-      <p
-        className="text-sm text-gray-400 cursor-pointer hover:underline"
-        onClick={() => console.log("Clear Filters clicked")}
-      >
-        Clear All Filters
-      </p>
-      <button onClick={() => setOpenFilter(false)} className="text-gray-500">
-        <FiX size={20} />
-      </button>
-    </div>
+            {/* Selected Tags */}
+            <div className="flex flex-wrap gap-2 mb-4">
+              {selectedFilters.map((f, idx) => (
+                <div key={idx} className="flex items-center bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full">
+                  {f.value}
+                  <FiX className="ml-1 cursor-pointer" onClick={() => removeFilter(f)} />
+                </div>
+              ))}
+            </div>
 
-    {/* Filter Items */}
-    {["BRANDS", "PRICE", "MOVEMENT", "STRAP TYPE", "WATER RESISTANCE"].map(
-      (item, index) => (
-        <div key={index} className="flex justify-between items-center py-4">
-          <span className="font-medium">{item}</span>
-          <FiPlus />
+            {/* Filter Categories */}
+            {Object.keys(filterOptions).map((category, idx) => (
+              <div key={idx} className="mb-4">
+                <div className="flex justify-between items-center cursor-pointer py-2" onClick={() => toggleExpand(category)}>
+                  <span className="font-medium">{category}</span>
+                  {expanded[category] ? <FiMinus /> : <FiPlus />}
+                </div>
+
+                <div className={`transition-all duration-300 overflow-hidden ${expanded[category] ? "max-h-64 mt-2" : "max-h-0"}`}>
+                  {/* Price as unique pills */}
+                  {category === "Price" ? (
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {filterOptions.Price.map((range, idx) => {
+                        const selected = selectedFilters.some(f => f.category === "Price" && f.value === range);
+                        return (
+                          <div
+                            key={idx}
+                            onClick={() => toggleFilter("Price", range)}
+                            className={`cursor-pointer px-3 py-1 rounded-full border ${selected ? "bg-black text-white border-black" : "bg-white text-gray-700 border-gray-300"} hover:bg-gray-900 hover:text-white transition`}
+                          >
+                            {range}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    filterOptions[category].map((option, idx2) => {
+                      const selected = selectedFilters.some(f => f.category === category && f.value === option);
+                      const disabled = selectedFilters.some(f => f.category === category) && !selected;
+                      return (
+                        <div
+                          key={idx2}
+                          className={`flex items-center gap-2 py-1 cursor-pointer ${disabled ? "opacity-40 pointer-events-none" : ""}`}
+                          onClick={() => toggleFilter(category, option)}
+                        >
+                          <div className={`w-4 h-4 border rounded-full flex-shrink-0 flex items-center justify-center ${selected ? "bg-black" : "bg-white"}`}></div>
+                          <span>{option}</span>
+                        </div>
+                      );
+                    })
+                  )}
+                </div>
+              </div>
+            ))}
+
+            {/* APPLY Button */}
+            <button className="w-full bg-black text-white py-3 mt-4" onClick={applyFilters}>
+              APPLY
+            </button>
+          </div>
         </div>
-      )
-    )}
-
-    <button className="w-full bg-black text-white py-3 mt-8">
-      APPLY
-    </button>
-
-  </div>
-</div>
 
         {/* Products Grid */}
-        <div
-          className={`grid gap-8 flex-1 transition-all duration-500 ${
-            openFilter ? "grid-cols-3" : "grid-cols-4"
-          }`}
-        >
-          {products.map((product) => (
+        <div className={`grid gap-8 flex-1 transition-all duration-500 ${openFilter ? "grid-cols-3" : "grid-cols-4"}`}>
+          {filteredProducts.map((product) => (
             <Link key={product.id} href={`/products/${product.id}`}>
               <div className="border p-5 hover:shadow-lg transition cursor-pointer">
                 <div className="relative h-64 w-full">
-                  <Image
-                    src={product.img}
-                    alt={product.name}
-                    fill
-                    className="object-contain"
-                  />
+                  <Image src={product.img} alt={product.name} fill className="object-contain" />
                 </div>
                 <h3 className="text-lg mt-4 font-semibold">{product.name}</h3>
-                <p className="text-gray-600">{product.price}</p>
+                <p className="text-gray-600">${product.price}</p>
               </div>
             </Link>
           ))}
         </div>
-
       </div>
 
-      {/* Pagination Center */}
+      {/* Pagination */}
       <div className="flex justify-center items-center gap-6 mt-16">
-        <button className="border p-3 hover:bg-gray-100 transition">
-          <IoIosArrowBack size={20} />
-        </button>
+        <button className="border p-3 hover:bg-gray-100 transition"><IoIosArrowBack size={20} /></button>
         <button className="px-4 py-2 border bg-black text-white">1</button>
         <button className="px-4 py-2 border hover:bg-gray-100">2</button>
-        <button className="border p-3 hover:bg-gray-100 transition">
-          <IoIosArrowForward size={20} />
-        </button>
+        <button className="border p-3 hover:bg-gray-100 transition"><IoIosArrowForward size={20} /></button>
       </div>
-
     </section>
   );
 }
