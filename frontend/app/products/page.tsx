@@ -23,26 +23,19 @@ export default function ProductsPage() {
 
       {/* Filter Button */}
       <div
-        onClick={() => setOpenFilter(true)}
-        className="flex items-center gap-2 cursor-pointer mb-10"
+        onClick={() => setOpenFilter(!openFilter)}
+        className="flex items-center gap-2 cursor-pointer mb-6"
       >
         <FiFilter size={22} />
         <span className="text-lg font-semibold">Filter</span>
       </div>
 
+      {/* Layout */}
+      <div className="flex">
 
-      {/* Sidebar Drawer */}
-      {openFilter && (
-        <div className="fixed inset-0 z-50 flex">
-
-          {/* Background Overlay */}
-          <div
-            className="flex-1 bg-black/40"
-            onClick={() => setOpenFilter(false)}
-          />
-
-          {/* Sidebar */}
-          <div className="w-80 bg-white p-8 overflow-y-auto">
+        {/* Sidebar */}
+        {openFilter && (
+          <div className="w-1/4 pr-8 border-r border-gray-300">
 
             <h2 className="text-2xl font-semibold mb-6">Filter</h2>
 
@@ -78,95 +71,61 @@ export default function ProductsPage() {
             <div className="mb-8">
               <h3 className="font-semibold mb-3">Color</h3>
 
-              <label className="block">
-                <input type="checkbox" className="mr-2" />
-                Black
-              </label>
-
-              <label className="block">
-                <input type="checkbox" className="mr-2" />
-                Silver
-              </label>
-
-              <label className="block">
-                <input type="checkbox" className="mr-2" />
-                Gold
-              </label>
+              <label className="block"><input type="checkbox" className="mr-2"/>Black</label>
+              <label className="block"><input type="checkbox" className="mr-2"/>Silver</label>
+              <label className="block"><input type="checkbox" className="mr-2"/>Gold</label>
             </div>
 
             {/* Gender */}
             <div className="mb-8">
               <h3 className="font-semibold mb-3">Gender</h3>
 
-              <label className="block">
-                <input type="checkbox" className="mr-2" />
-                Men
-              </label>
-
-              <label className="block">
-                <input type="checkbox" className="mr-2" />
-                Women
-              </label>
-
-              <label className="block">
-                <input type="checkbox" className="mr-2" />
-                Unisex
-              </label>
+              <label className="block"><input type="checkbox" className="mr-2"/>Men</label>
+              <label className="block"><input type="checkbox" className="mr-2"/>Women</label>
+              <label className="block"><input type="checkbox" className="mr-2"/>Unisex</label>
             </div>
 
             {/* Discount */}
             <div>
               <h3 className="font-semibold mb-3">Discount</h3>
 
-              <label className="block">
-                <input type="checkbox" className="mr-2" />
-                10% Off
-              </label>
-
-              <label className="block">
-                <input type="checkbox" className="mr-2" />
-                20% Off
-              </label>
-
-              <label className="block">
-                <input type="checkbox" className="mr-2" />
-                30% Off
-              </label>
+              <label className="block"><input type="checkbox" className="mr-2"/>10% Off</label>
+              <label className="block"><input type="checkbox" className="mr-2"/>20% Off</label>
+              <label className="block"><input type="checkbox" className="mr-2"/>30% Off</label>
             </div>
 
           </div>
+        )}
 
-        </div>
-      )}
+        {/* Products */}
+        <div className={`${openFilter ? "w-3/4 pl-10" : "w-full"} grid grid-cols-3 gap-8`}>
 
+          {products.map((product) => (
+            <Link key={product.id} href={`/products/${product.id}`}>
 
-      {/* Products */}
-      <div className="grid grid-cols-3 gap-8">
+              <div className="border p-4 cursor-pointer hover:shadow-lg transition">
 
-        {products.map((product) => (
-          <Link key={product.id} href={`/products/${product.id}`}>
+                <div className="relative h-60 w-full">
+                  <Image
+                    src={product.img}
+                    alt={product.name}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
 
-            <div className="border p-4 cursor-pointer hover:shadow-lg transition">
+                <h3 className="text-xl mt-4 font-semibold">
+                  {product.name}
+                </h3>
 
-              <div className="relative h-60 w-full">
-                <Image
-                  src={product.img}
-                  alt={product.name}
-                  fill
-                  className="object-contain"
-                />
+                <p className="text-gray-600">{product.price}</p>
+
               </div>
 
-              <h3 className="text-xl mt-4 font-semibold">
-                {product.name}
-              </h3>
+            </Link>
+          ))}
 
-              <p className="text-gray-600">{product.price}</p>
-
-            </div>
-
-          </Link>
-        ))}
+        </div>
 
       </div>
 
