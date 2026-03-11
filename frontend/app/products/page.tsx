@@ -1,14 +1,11 @@
-
-
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { FiFilter, FiPlus, FiX, FiMinus } from "react-icons/fi";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { FiFilter, FiPlus, FiX, FiMinus, FiHeart } from "react-icons/fi";
+import { BsCart3 } from "react-icons/bs";
 
-// FULL PRODUCT DATA including colors, strap type, category, brand, gender, price
 const productsData = [
   { id: 1, name: "Black Leather", brand: "Rolex", color: "Black", price: 250, strap: "Leather", category: "Luxury", gender: "Men", img: "/products/p1.jpg" },
   { id: 2, name: "Rose Gold", brand: "Casio", color: "Rose Gold", price: 350, strap: "Metal", category: "Classic", gender: "Women", img: "/products/p2.jpg" },
@@ -47,59 +44,38 @@ const productsData = [
   { id: 37, name: "Black Chronograph", brand: "Tag Heuer", color: "Black", price: 560, strap: "Metal", category: "Sport", gender: "Men", img: "/products/p37.jpg" }
 ];
 
-// Dynamically generate filter options from products
-const generateFilters = (products) => {
-  return {
-    Brands: [...new Set(products.map(p => p.brand))],
-    Colors: [...new Set(products.map(p => p.color))],
-    "Strap Type": [...new Set(products.map(p => p.strap))],
-    "Category / Style": [...new Set(products.map(p => p.category))],
-    Gender: [...new Set(products.map(p => p.gender))],
-    Price: ["$100–$200","$201–$350","$351–$500","$501+"], // fixed ranges
-  };
-};
+
+// Dynamically generate filter options
+const generateFilters = (products) => ({
+  Brands: [...new Set(products.map(p => p.brand))],
+  Colors: [...new Set(products.map(p => p.color))],
+  "Strap Type": [...new Set(products.map(p => p.strap))],
+  "Category / Style": [...new Set(products.map(p => p.category))],
+  Gender: [...new Set(products.map(p => p.gender))],
+  Price: ["$100–$200","$201–$350","$351–$500","$501+"],
+});
 
 export default function ProductsPage() {
   const [openFilter, setOpenFilter] = useState(false);
   const [expanded, setExpanded] = useState({});
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState(productsData);
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 9; 
   const filterOptions = generateFilters(productsData);
 
-  // Expand/collapse category
-  const toggleExpand = (category) => {
-    setExpanded({ ...expanded, [category]: !expanded[category] });
-  };
-
-  // Toggle selection for a filter (only selects, APPLY updates products)
+  const toggleExpand = (category) => setExpanded({ ...expanded, [category]: !expanded[category] });
   const toggleFilter = (category, value) => {
     let updatedFilters = [...selectedFilters];
     const exists = updatedFilters.find(f => f.category === category && f.value === value);
-
-    if (exists) {
-      updatedFilters = updatedFilters.filter(f => f !== exists);
-    } else {
-      // only one selection per category
-      updatedFilters = [...updatedFilters.filter(f => f.category !== category), { category, value }];
-    }
-
+    if (exists) updatedFilters = updatedFilters.filter(f => f !== exists);
+    else updatedFilters = [...updatedFilters.filter(f => f.category !== category), { category, value }];
     setSelectedFilters(updatedFilters);
   };
-
-  const removeFilter = (filter) => {
-    setSelectedFilters(selectedFilters.filter(f => f !== filter));
-  };
-
-  const clearAllFilters = () => {
-    setSelectedFilters([]);
-    setFilteredProducts(productsData);
-  };
-
-  // APPLY button → filter products and close sidebar
+  const removeFilter = (filter) => setSelectedFilters(selectedFilters.filter(f => f !== filter));
+  const clearAllFilters = () => { setSelectedFilters([]); setFilteredProducts(productsData); setCurrentPage(1); };
   const applyFilters = () => {
     let filtered = productsData;
-
     selectedFilters.forEach(f => {
       switch(f.category) {
         case "Brands": filtered = filtered.filter(p => p.brand === f.value); break;
@@ -117,32 +93,35 @@ export default function ProductsPage() {
         case "Gender": filtered = filtered.filter(p => p.gender === f.value); break;
       }
     });
-
     setFilteredProducts(filtered);
+    setCurrentPage(1);
     setOpenFilter(false);
   };
 
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
   return (
-    <section className="w-full min-h-screen px-12 py-12">
-      <h1 className="text-4xl font-semibold text-center mb-12">Our Products</h1>
+    <section className="w-full min-h-screen px-12 py-12 poppins">
+      <h1 className="text-7xl font-extralight text-center mb-12 allura">Our Products</h1>
 
       {/* Filter Button */}
       <div onClick={() => setOpenFilter(!openFilter)} className="flex items-center gap-2 cursor-pointer mb-10">
-        <FiFilter size={22} />
+        
         <span className="text-lg font-semibold">Filters</span>
+        <FiFilter size={22} />
       </div>
 
       <div className="flex gap-10">
         {/* Sidebar */}
         <div className={`transition-all duration-500 overflow-hidden ${openFilter ? "w-80" : "w-0"}`}>
           <div className={`border p-6 bg-white relative ${openFilter ? "max-h-[1200px]" : "max-h-0"} transition-all duration-500`}>
-            {/* Clear All & Close */}
             <div className="flex justify-between items-center mb-4">
               <p className="text-sm text-gray-400 cursor-pointer hover:underline" onClick={clearAllFilters}>Clear All Filters</p>
               <button onClick={() => setOpenFilter(false)} className="text-gray-500"><FiX size={20} /></button>
             </div>
-
-            {/* Selected Tags */}
             <div className="flex flex-wrap gap-2 mb-4">
               {selectedFilters.map((f, idx) => (
                 <div key={idx} className="flex items-center bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full">
@@ -151,17 +130,13 @@ export default function ProductsPage() {
                 </div>
               ))}
             </div>
-
-            {/* Filter Categories */}
             {Object.keys(filterOptions).map((category, idx) => (
               <div key={idx} className="mb-4">
                 <div className="flex justify-between items-center cursor-pointer py-2" onClick={() => toggleExpand(category)}>
                   <span className="font-medium">{category}</span>
                   {expanded[category] ? <FiMinus /> : <FiPlus />}
                 </div>
-
                 <div className={`transition-all duration-300 overflow-hidden ${expanded[category] ? "max-h-64 mt-2" : "max-h-0"}`}>
-                  {/* Price as pills */}
                   {category === "Price" ? (
                     <div className="flex flex-wrap gap-2 mt-2">
                       {filterOptions.Price.map((range, idx) => {
@@ -196,24 +171,48 @@ export default function ProductsPage() {
                 </div>
               </div>
             ))}
-
-            {/* APPLY Button */}
-            <button className="w-full bg-black text-white py-3 mt-4" onClick={applyFilters}>
-              APPLY
-            </button>
+            <button className="w-full bg-black text-white py-3 mt-4" onClick={applyFilters}>APPLY</button>
           </div>
         </div>
 
         {/* Products Grid */}
-        <div className={`grid gap-8 flex-1 transition-all duration-500 ${openFilter ? "grid-cols-3" : "grid-cols-4"}`}>
-          {filteredProducts.map((product) => (
+        <div className={`grid gap-8 flex-1 transition-all duration-500 grid-cols-3`}>
+          {currentProducts.map((product) => (
             <Link key={product.id} href={`/products/${product.id}`}>
-              <div className="border p-5 hover:shadow-lg transition cursor-pointer">
-                <div className="relative h-64 w-full">
+              <div className="border p-5 hover:shadow-lg transition cursor-pointer flex flex-col justify-between relative">
+                <div className="relative h-64 w-full bg-gray-100">
                   <Image src={product.img} alt={product.name} fill className="object-contain" />
+
+                  {/* Heart & Cart Icons */}
+                  <div className="absolute top-2 right-2 flex flex-col gap-2">
+                    <button className="bg-white p-3 rounded-full shadow hover:bg-gray-200 transition cursor-pointer">
+                      <FiHeart className="text-red-500 text-xl" />
+                    </button>
+                    <button className="bg-white p-3 rounded-full shadow hover:bg-gray-200 transition cursor-pointer">
+                      <BsCart3 className="text-gray-800 text-xl" />
+                    </button>
+                  </div>
+
+                  {/* Product Tags */}
+                  <div className="absolute top-2 left-2 flex flex-col gap-1">
+                    {product.tags?.map((tag, idx) => (
+                      <span key={idx} className="bg-gray-900/80 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
+
+                {/* Name */}
                 <h3 className="text-lg mt-4 font-semibold">{product.name}</h3>
-                <p className="text-gray-600">${product.price}</p>
+
+                {/* Button + Price */}
+                <div className="mt-2 flex justify-between items-center">
+                  <button className="bg-black text-white px-6 py-2 border border-black hover:bg-white hover:text-black transition font-medium cursor-pointer">
+                    View
+                  </button>
+                  <p className="font-serif text-2xl">${product.price}</p>
+                </div>
               </div>
             </Link>
           ))}
@@ -221,15 +220,53 @@ export default function ProductsPage() {
       </div>
 
       {/* Pagination */}
-      <div className="flex justify-center items-center gap-6 mt-16">
-        <button className="border p-3 hover:bg-gray-100 transition"><IoIosArrowBack size={20} /></button>
-        <button className="px-4 py-2 border bg-black text-white">1</button>
-        <button className="px-4 py-2 border hover:bg-gray-100">2</button>
-        <button className="border p-3 hover:bg-gray-100 transition"><IoIosArrowForward size={20} /></button>
+      <div className="flex justify-center items-center gap-4 mt-16">
+        <button className="px-4 py-2 border p-3 hover:bg-gray-100 transition" onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}>&lt;</button>
+        <span className="px-4 py-2 border bg-black text-white">{currentPage}</span>
+        <button className="px-4 py-2 border p-3 hover:bg-gray-100 transition" onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}>&gt;</button>
       </div>
     </section>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
