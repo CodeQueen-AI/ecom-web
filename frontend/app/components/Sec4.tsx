@@ -12,7 +12,7 @@ export default function DiscoverSection() {
 
   return (
     <section className="py-16 poppins">
-      <h2 className="text-center text-2xl tracking-[0.3em] mb-12">
+      <h2 className="text-center text-4xl tracking-[0.3em] mb-12 font-serif">
         DISCOVER
       </h2>
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
