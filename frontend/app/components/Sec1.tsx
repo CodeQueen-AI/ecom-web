@@ -7,7 +7,7 @@ export default function SeasonCollection() {
     <section className="w-full py-20">
       <div className="max-w-7xl mx-auto poppins px-6">
         <h1 className="text-4xl text-center mb-16">
-          <span className="allura text-5xl">Season Collection</span>
+          <span className="allura text-6xl">Season Collection</span>
         </h1>
         <div className="grid grid-cols-3 gap-12">
           <div>
