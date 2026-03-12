@@ -15,7 +15,7 @@ export default function Navbar() {
   const [cartOpen, setCartOpen] = useState(false);
 
   return (
-    <nav className="w-full flex items-center px-10 py-6 relative">
+    <nav className="w-full flex items-center px-16 py-6 relative">
       {isHome && (
         <div className="absolute inset-0 flex -z-10">
           <div className="w-1/2 bg-[#09162c]"></div>
