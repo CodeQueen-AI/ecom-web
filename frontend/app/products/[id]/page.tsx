@@ -38,11 +38,24 @@ export default function ProductDetailPage() {
 
   const handleHeartClick = () => setIsFavorite(!isFavorite);
 
+  // const handleAddToCart = () => {
+  //   addToCart({ ...product, quantity });
+  //   setShowPopup(true);
+  //   setTimeout(() => setShowPopup(false), 3000);
+  // };
+
   const handleAddToCart = () => {
-    addToCart({ ...product, quantity });
-    setShowPopup(true);
-    setTimeout(() => setShowPopup(false), 3000);
-  };
+  addToCart({
+    id: product.id,
+    name: product.name,
+    price: parseInt(product.price.replace("$","")),
+    image: product.img,
+    quantity: quantity
+  });
+
+  setShowPopup(true);
+  setTimeout(() => setShowPopup(false), 3000);
+};
 
   return (
     <section className="poppins overflow-hidden">
