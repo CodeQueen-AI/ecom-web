@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+
 export default function Hero() {
   return (
     <section className="w-full min-h-screen flex overflow-hidden">
