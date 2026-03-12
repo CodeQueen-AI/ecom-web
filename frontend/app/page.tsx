@@ -7,9 +7,10 @@ import Sec5 from './components/Sec5'
 import Sec6 from './components/Sec6'
 import Sec7 from './components/Sec7'
 import Sec8 from './components/Sec8'
+import Sec9 from './components/Sec9'
 import Sec10 from './components/Sec10'
 
-import Sec12 from './components/Sec12'
+
 import Sec13 from './components/Sec13'
 import Sec14 from './components/Sec14'
 import Sec15 from './components/Sec15'
@@ -25,9 +26,8 @@ export default function Page() {
     <Sec6/>
     <Sec7/>
     <Sec8/>
+    <Sec9/>
     <Sec10/>
-    
-    <Sec12/>
     <Sec13/>
     <Sec14/>
     <Sec15/>
