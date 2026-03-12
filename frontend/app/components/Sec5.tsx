@@ -4,7 +4,7 @@ export default function sec() {
     <section className="w-full overflow-hidden poppins">
       <div className="max-w-9xl mx-auto px-6 py-12 relative">
         <div className="flex items-center gap-6">
-          <h1 className="text-[110px] leading-[0.9] flex items-center font-extralight ml-24">
+          <h1 className="text-[110px] leading-[0.9] flex items-center ml-24 font-serif">
             Express
             <span className="text-orange-500 mx-4"> — </span>
             <span className="allura">Yourself</span>
@@ -18,7 +18,7 @@ export default function sec() {
             className="text-center max-w-sm text-base leading-relaxed font-extralight line-clamp-3">
             Explore our stylish shoes and accessories quality, comfort and trend all in one place
           </p>
-          <h1 className="text-[120px] font-extralight leading-none mr-[-20px]">
+          <h1 className="text-[120px] font-serif leading-none mr-[-20px]">
             Style<span className="text-orange-500">.</span>
           </h1>
         </div>
