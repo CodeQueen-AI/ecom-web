@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 export default function WatchBanner() {
   return (
     <section className="relative py-24 overflow-hidden poppins">
@@ -24,12 +25,14 @@ export default function WatchBanner() {
             consequatur qui doloremque delectus ullam quaerat
             libero ut, nisi praesentium
           </p>
-          <p className="text-2xl font-semibold mb-6">
+          <p className="text-2xl font-serif mb-6">
             $ 3,899
           </p>
-          <button className="bg-white px-8 py-4 text-black text-lg hover:bg-[#08121d] hover:text-white transition cursor-pointer">
-            Order Now
+          <Link href = "/products">
+          <button className="bg-white px-8 py-4 text-black text-lg hover:bg-white hover:text-black transition cursor-pointer">
+              Order Now
           </button>
+          </Link>
         </div>
         <div className="flex justify-center">
           <Image
