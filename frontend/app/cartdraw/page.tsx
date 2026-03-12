@@ -13,6 +13,7 @@ export default function CartDrawer({ isOpen, setIsOpen }) {
   );
 
   return (
+    <div className="poppins">
     <div
       className={`fixed inset-0 z-50 transition ${
         isOpen ? "visible" : "invisible"
@@ -33,8 +34,8 @@ export default function CartDrawer({ isOpen, setIsOpen }) {
         }`}
       >
         {/* Header */}
-        <div className="flex justify-between items-center">
-          <h2 className="text-3xl font-semibold">Shopping Cart</h2>
+        <div className="flex justify-between items-center poppins">
+          <h2 className="text-3xl font-semibold ">Shopping Cart</h2>
 
           <button
             onClick={() => setIsOpen(false)}
@@ -88,7 +89,6 @@ export default function CartDrawer({ isOpen, setIsOpen }) {
 
         {/* Subtotal */}
         <div className="mt-6">
-          <hr className="mb-4" />
 
           <div className="flex justify-between text-lg font-medium">
             <span>Subtotal</span>
@@ -100,18 +100,18 @@ export default function CartDrawer({ isOpen, setIsOpen }) {
 
           <hr className="my-6" />
 
-          {/* Buttons */}
-          <div className="flex flex-col gap-3">
-            <button className="w-full border rounded-full py-3 font-semibold hover:bg-black hover:text-white transition">
-              Cart
-            </button>
+          <div className="flex gap-3">
+  <button className="flex-1 border rounded-full py-3 px-2 text-sm font-semibold hover:bg-black hover:text-white transition">
+    Cart
+  </button>
 
-            <button className="w-full border rounded-full py-3 font-semibold hover:bg-black hover:text-white transition">
-              Checkout
-            </button>
-          </div>
+  <button className="flex-1 border rounded-full py-2 text-sm font-semibold hover:bg-black hover:text-white transition">
+    Checkout
+  </button>
+</div>
         </div>
       </div>
+    </div>
     </div>
   );
 }
