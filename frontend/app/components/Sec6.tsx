@@ -1,36 +1,31 @@
 "use client";
 import Image from "next/image";
-export default function WatchSection() {
+
+export default function SmartWatchSection() {
   return (
-    <section className="w-full flex h-screen overflow-hidden">
-      <div className="w-1/2 relative">
+    <div className="w-full min-h-screen flex flex-col md:flex-row bg-[#09162c] poppins">
+      <div className="w-full md:w-1/2 h-80 md:h-auto relative">
         <Image
-          src="/Imges/Img6.webp"
-          alt="watch"
-          fill
-          className="object-cover"/>
+          src="/watch/w11.jpg" 
+          alt="Smart Watch"
+          width={900}
+          height={900}/>
       </div>
-      <div className="w-1/2 relative">
-        <Image
-          src="/Imges/Img7.webp"
-          alt="watch"
-          fill
-          className="object-cover"/>
-        <div className="absolute inset-0 flex flex-col justify-between text-white poppins">
-          <div className="text-center pt-5">
-            <p className="text-lg">New collection</p>
-            <h1 className="text-4xl font-extralight mt-2">
-              Edifice
-            </h1>
-          </div>
-        <div className="pb-10 pt-20">
-          <div className="border-t border-white w-[90%] ml-10 mb-4"></div>
-        <p className="text-lg ml-10">
-          Shop new collection
-        </p>
+      <div className="w-full md:w-1/2 flex flex-col justify-center items-center px-8 md:px-16 py-12 text-white">
+      <h1 className="text-7xl mb-6 allura">
+        Smart Watch
+      </h1>
+      <p className="text-lg font-extralight mb-8 text-center">
+        Experience the perfect blend of style and technology with this smart watch
+        Track your fitness stay connected and elevate your everyday look effortlessly
+        Designed for comfort and performance
+      </p>
+      <button
+        className="bg-white text-[#09162c] border border-[#09162c] px-10 py-4 text-lg hover:bg-[#09162c]
+         hover:text-white hover:border-white transition cursor-pointer">
+        Add To Cart
+      </button>
     </div>
-        </div>
-      </div>
-    </section>
+    </div>
   );
 }
