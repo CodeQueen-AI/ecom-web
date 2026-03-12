@@ -1,7 +1,6 @@
 "use client";
-
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import Image from "next/image";
-import { IoClose } from "react-icons/io5";
 import { useCart } from "../Context/cartcontext";
 
 export default function CartDrawer({ isOpen, setIsOpen }) {
@@ -41,7 +40,7 @@ export default function CartDrawer({ isOpen, setIsOpen }) {
             onClick={() => setIsOpen(false)}
             className="flex items-center gap-1 text-lg font-medium hover:text-gray-600"
           >
-            Close <IoClose size={22} />
+            <AiOutlineCloseCircle size={22} />
           </button>
         </div>
 
@@ -81,7 +80,7 @@ export default function CartDrawer({ isOpen, setIsOpen }) {
                 onClick={() => removeFromCart(item.id)}
                 className="text-gray-500 hover:text-black"
               >
-                <IoClose size={20} />
+                <AiOutlineCloseCircle size={20} />
               </button>
             </div>
           ))}
