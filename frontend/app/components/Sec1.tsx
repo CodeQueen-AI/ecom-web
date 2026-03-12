@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function SeasonCollection() {
   return (
@@ -15,14 +16,16 @@ export default function SeasonCollection() {
                 src="/watch/w8.webp"
                 alt="Kenneth Cole"
                 fill
-                className="object-cover"/>
+                className="object-cover cursor-pointer"/>
             </div>
             <h2 className="text-2xl mt-6">
               Kenneth Cole New York
             </h2>
+          <Link href={"/products"}>
             <button className="mt-6 border border-gray-400 px-6 py-2 hover:bg-black hover:text-white transition cursor-pointer">
               Shop Now
             </button>
+            </Link>
           </div>
           <div>
             <div className="relative w-full h-[420px]">
@@ -35,9 +38,11 @@ export default function SeasonCollection() {
             <h2 className="text-2xl mt-6">
               Lee Cooper
             </h2>
+            <Link href={"/products"}>
             <button className="mt-6 border border-gray-400 px-6 py-2 hover:bg-black hover:text-white transition cursor-pointer">
               Shop Now
             </button>
+            </Link>
           </div>
           <div>
             <div className="relative w-full h-[420px]">
@@ -50,9 +55,11 @@ export default function SeasonCollection() {
             <h2 className="text-2xl mt-6">
               Edifice
             </h2>
+            <Link href={"/products"}>
             <button className="mt-6 border border-gray-400 px-6 py-2 hover:bg-black hover:text-white transition cursor-pointer">
               Shop Now
             </button>
+            </Link>
           </div>
         </div>
       </div>
