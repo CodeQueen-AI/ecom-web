@@ -133,16 +133,16 @@ export default function ProductDetailPage() {
 <div className="border-b py-2">
   <button
     onClick={() => toggleSection("details")}
-    className="flex justify-between items-center w-full text-lg font-serif"
+    className="flex justify-between items-center w-full text-lg font-serif cursor-pointer"
   >
     Product Details
-    <span className={`text-lg transition-transform duration-300 ${openSection === "details" ? "rotate-45" : ""}`}>+</span>
+    <span className={`text-xl transition-transform duration-300 ${openSection === "details" ? "rotate-45" : ""}`}>+</span>
   </button>
 
   <div className={`overflow-hidden transition-all duration-300 ${openSection === "details" ? "max-h-32 mt-2" : "max-h-0"}`}>
-    <div className="text-gray-600 text-sm px-1">
+    <div className="text-sm px-1">
       <p>
-        The {product.color.toLowerCase()} {product.name} brand is <span className="font-medium text-black">{product.brand}</span>, belongs to the <span className="font-medium text-black">{product.category}</span> category, and is designed for <span className="font-medium text-black">{product.gender}</span>.
+        The {product.color.toLowerCase()} {product.name} brand is <span className="font-medium text-black">{product.brand}</span> belongs to the <span className="font-medium text-black">{product.category}</span> category and is designed for <span className="font-medium text-black">{product.gender}</span>
       </p>
     </div>
   </div>
@@ -152,16 +152,16 @@ export default function ProductDetailPage() {
 <div className="border-b py-2">
   <button
     onClick={() => toggleSection("spec")}
-    className="flex justify-between items-center w-full text-lg font-serif"
+    className="flex justify-between items-center w-full text-lg font-serif cursor-pointer"
   >
     Specifications
-    <span className={`text-lg transition-transform duration-300 ${openSection === "spec" ? "rotate-45" : ""}`}>+</span>
+    <span className={`text-xl transition-transform duration-300 ${openSection === "spec" ? "rotate-45" : ""}`}>+</span>
   </button>
 
   <div className={`overflow-hidden transition-all duration-300 ${openSection === "spec" ? "max-h-32 mt-2" : "max-h-0"}`}>
-    <div className="text-gray-600 text-sm px-1">
+    <div className="text-sm px-1">
       <p>
-        It comes in <span className="font-medium text-black">{product.color}</span> color with a <span className="font-medium text-black">{product.strap}</span> strap.
+        It comes in <span className="font-medium text-black">{product.color}</span> color with a <span className="font-medium text-black">{product.strap}</span> strap
       </p>
     </div>
   </div>
