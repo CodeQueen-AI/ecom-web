@@ -207,7 +207,7 @@ export default function ProductsPage() {
     <div className="relative h-64 w-full bg-gray-100 group cursor-pointer overflow-hidden">
 
       {/* Product Tags */}
-      <div className="absolute top-2 left-2 flex flex-col gap-1 z-50">
+      {/* <div className="absolute top-2 left-2 flex flex-col gap-1 z-50">
 
         {product.outofstock && (
           <span className="text-[10px] px-2 py-[3px] rounded-full bg-gray-800 text-white font-medium shadow">
@@ -227,7 +227,28 @@ export default function ProductsPage() {
           </span>
         )}
 
-      </div>
+      </div> */}
+
+      {/* Product Tags */}
+<div className="absolute top-2 left-2 flex flex-col gap-1 z-50">
+  {product.outofstock && (
+    <span className="text-[10px] font-medium px-2 py-[2px] rounded-full bg-gray-800 text-white shadow-sm uppercase tracking-wide">
+      Out Of Stock
+    </span>
+  )}
+
+  {product.discount && (
+    <span className="text-[10px] font-medium px-2 py-[2px] rounded-full bg-red-500 text-white shadow-sm uppercase tracking-wide">
+      {product.discount}% OFF
+    </span>
+  )}
+
+  {product.new && (
+    <span className="text-[10px] font-medium px-2 py-[2px] rounded-full bg-blue-500 text-white shadow-sm uppercase tracking-wide">
+      New Arrival
+    </span>
+  )}
+</div>
 
       {/* Product Image */}
       <Link
