@@ -1,5 +1,4 @@
 "use client";
-
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import Image from "next/image";
@@ -21,30 +20,41 @@ interface Product {
 }
 
 const products: Product[] = [
-  {
-    id: 9,
-    name: "Black Leather",
-    brand: "Rolex",
-    color: "Black",
-    price: 250,
-    strap: "Leather",
-    category: "Luxury",
-    gender: "Men",
-    img: "/products/p1.jpg",
-    description: "Classic black leather watch with a timeless design.",
-  },
-  {
-    id: 10,
-    name: "Rose Gold",
-    brand: "Casio",
-    color: "Rose Gold",
-    price: 350,
-    strap: "Metal",
-    category: "Classic",
-    gender: "Women",
-    img: "/products/p2.jpg",
-    description: "Elegant rose gold watch perfect for formal occasions.",
-  },
+  { id: 9, name: "Black Leather", brand: "Rolex", color: "Black", price: 250, strap: "Leather", category: "Luxury", gender: "Men", img: "/products/p1.jpg", description: "Classic black leather watch with a timeless design." },
+  { id: 10, name: "Rose Gold", brand: "Casio", color: "Rose Gold", price: 350, strap: "Metal", category: "Classic", gender: "Women", img: "/products/p2.jpg", description: "Elegant rose gold watch perfect for formal occasions.", new: true },
+  { id: 11, name: "White Dial", brand: "Fossil", color: "White", price: 200, strap: "Silicone", category: "Sport", gender: "Men", img: "/products/p3.jpg", description: "Sporty white dial watch with comfortable silicone strap." },
+  { id: 12, name: "Silver Chrono", brand: "Seiko", color: "Silver", price: 450, strap: "Metal", category: "Smart Watch", gender: "Women", img: "/products/p4.jpg", description: "Modern silver chronograph with smart features.", outofstock: true },
+  { id: 13, name: "Rose Slim", brand: "Casio", color: "Rose", price: 350, strap: "Leather", category: "Classic", gender: "Women", img: "/products/p5.jpg", description: "Slim and stylish rose-colored leather watch." },
+  { id: 14, name: "Black Steel", brand: "Rolex", color: "Black", price: 450, strap: "Metal", category: "Luxury", gender: "Men", img: "/products/p6.jpg", description: "Luxury black steel watch with a bold design.", discount: 5 },
+  { id: 15, name: "Blue Sport", brand: "Omega", color: "Blue", price: 500, strap: "Metal", category: "Classic", gender: "Men", img: "/products/p9.jpg", description: "Durable blue sports watch with metal strap." },
+  { id: 16, name: "Pink Elegance", brand: "Tag Heuer", color: "Pink", price: 450, strap: "Metal", category: "Luxury", gender: "Women", img: "/products/p10.jpg", description: "Elegant pink watch for women with a luxury feel.", discount: 5 },
+  { id: 17, name: "Gold Master", brand: "Rolex", color: "Gold", price: 650, strap: "Metal", category: "Luxury", gender: "Men", img: "/products/p11.jpg", description: "Golden masterpiece for the ultimate luxury lover.", new: true },
+  { id: 18, name: "Red Dial Classic", brand: "Seiko", color: "Red", price: 320, strap: "Metal", category: "Classic", gender: "Men", img: "/products/p12.jpg", description: "Classic red dial watch for men." },
+  { id: 19, name: "Silver Minimal", brand: "Casio", color: "Silver", price: 210, strap: "Metal", category: "Classic", gender: "Women", img: "/products/p13.jpg", description: "Minimalistic silver watch with elegant design.", outofstock: true },
+  { id: 20, name: "Gold Shine", brand: "Fossil", color: "Gold", price: 380, strap: "Metal", category: "Classic", gender: "Women", img: "/products/p14.jpg", description: "Shining gold watch to add glamour to any outfit." },
+  { id: 21, name: "Rose Beauty", brand: "Fossil", color: "Rose Gold", price: 340, strap: "Metal", category: "Classic", gender: "Women", img: "/products/p15.jpg", description: "Beautiful rose gold watch for everyday elegance." },
+  { id: 22, name: "Black Steel Pro", brand: "Casio", color: "Black", price: 410, strap: "Metal", category: "Sport", gender: "Men", img: "/products/p16.jpg", description: "Professional black steel sports watch." },
+  { id: 23, name: "Green Field", brand: "Seiko", color: "Green", price: 300, strap: "Nylon", category: "Sport", gender: "Men", img: "/products/p17.jpg", description: "Green nylon strap watch designed for outdoor activities.", discount: 10 },
+  { id: 24, name: "Rose Classic", brand: "Fossil", color: "Rose Gold", price: 360, strap: "Metal", category: "Classic", gender: "Women", img: "/products/p18.jpg", description: "Timeless rose gold classic watch.", new: true },
+  { id: 25, name: "Black Diver", brand: "Rolex", color: "Black", price: 700, strap: "Rubber", category: "Sport", gender: "Men", img: "/products/p19.jpg", description: "High-end black diver watch for water sports." },
+  { id: 26, name: "Diamond Lady", brand: "Tag Heuer", color: "Silver", price: 520, strap: "Metal", category: "Luxury", gender: "Women", img: "/products/p20.jpg", description: "Silver luxury watch with diamond accents.", new: true },
+  { id: 27, name: "Golden Charm", brand: "Rolex", color: "Gold", price: 620, strap: "Metal", category: "Luxury", gender: "Women", img: "/products/p21.jpg", description: "Charming golden watch perfect for gifting." },
+  { id: 28, name: "Steel Chrono", brand: "Seiko", color: "Silver", price: 410, strap: "Metal", category: "Sport", gender: "Men", img: "/products/p22.jpg", description: "Silver steel chronograph for sports enthusiasts." },
+  { id: 29, name: "Black Tactical", brand: "Casio", color: "Black", price: 290, strap: "Rubber", category: "Sport", gender: "Men", img: "/products/p23.jpg", description: "Tactical black watch built for tough conditions.", outofstock: true },
+  { id: 30, name: "Blue Royal", brand: "Omega", color: "Blue", price: 540, strap: "Metal", category: "Luxury", gender: "Men", img: "/products/p24.jpg", description: "Royal blue luxury watch with metal strap." },
+  { id: 31, name: "Golden Chrono", brand: "Rolex", color: "Gold", price: 680, strap: "Metal", category: "Luxury", gender: "Men", img: "/products/p25.jpg", description: "Golden chronograph for precision and style.", discount: 15 },
+  { id: 32, name: "Blue Mesh", brand: "Fossil", color: "Blue", price: 260, strap: "Metal", category: "Classic", gender: "Men", img: "/products/p26.jpg", description: "Blue mesh watch for a modern classic look." },
+  { id: 33, name: "Skeleton Dial", brand: "Tag Heuer", color: "Brown", price: 590, strap: "Leather", category: "Luxury", gender: "Men", img: "/products/p27.jpg", description: "Luxury skeleton dial watch showcasing inner mechanics.", new: true },
+  { id: 34, name: "Brown Classic", brand: "Seiko", color: "Brown", price: 370, strap: "Leather", category: "Classic", gender: "Men", img: "/products/p28.jpg", description: "Classic brown leather watch for daily wear." },
+  { id: 35, name: "Sport Racer", brand: "Casio", color: "Blue", price: 330, strap: "Leather", category: "Sport", gender: "Men", img: "/products/p29.jpg", description: "Blue leather strap watch designed for racing." },
+  { id: 36, name: "Golden Edge", brand: "Rolex", color: "Gold", price: 640, strap: "Metal", category: "Luxury", gender: "Men", img: "/products/p30.jpg", description: "Golden edge luxury watch with elegant finish." },
+  { id: 37, name: "Silver Pro", brand: "Omega", color: "Silver", price: 470, strap: "Metal", category: "Sport", gender: "Men", img: "/products/p31.jpg", description: "Professional silver watch for sports.", outofstock: true },
+  { id: 38, name: "Rose Mini", brand: "Fossil", color: "Rose Gold", price: 310, strap: "Metal", category: "Classic", gender: "Women", img: "/products/p32.jpg", description: "Mini rose gold watch for women." },
+  { id: 39, name: "Steel Classic", brand: "Seiko", color: "Silver", price: 420, strap: "Metal", category: "Classic", gender: "Men", img: "/products/p33.jpg", description: "Classic steel watch for everyday wear." },
+  { id: 40, name: "Beige Fashion", brand: "Casio", color: "Beige", price: 280, strap: "Fabric", category: "Classic", gender: "Women", img: "/products/p34.jpg", description: "Fashionable beige watch with fabric strap.", discount: 20 },
+  { id: 41, name: "Black Gold Mix", brand: "Rolex", color: "Black", price: 610, strap: "Metal", category: "Luxury", gender: "Men", img: "/products/p35.jpg", description: "Black and gold mix watch for luxurious style." },
+  { id: 42, name: "Minimal Lady", brand: "Fossil", color: "Black", price: 290, strap: "Leather", category: "Classic", gender: "Women", img: "/products/p36.jpg", description: "Minimalist black leather watch for women.", new: true },
+  { id: 43, name: "Black Chronograph", brand: "Tag Heuer", color: "Black", price: 560, strap: "Metal", category: "Sport", gender: "Men", img: "/products/p37.jpg", description: "Black chronograph watch for sporty men." }
 ];
 
 export default function ProductDetailPage() {
@@ -99,59 +109,63 @@ export default function ProductDetailPage() {
 
             <div>
               {/* Product Name */}
-              <h1 className="text-4xl font-extralight mb-4 text-blue-950 allura text-center lg:text-left">
+              <h1 className="text-6xl font-extralight mb-4 text-blue-950 allura text-center lg:text-left">
                 {product.name}
               </h1>
 
               {/* Description Box */}
               <fieldset className="border border-gray-300 rounded-lg px-3 py-2 mb-4 shadow-sm">
-                <legend className="text-xs font-semibold px-1">DESCRIPTION</legend>
-                <p className="text-gray-700 text-sm">{product.description}</p>
+                <legend className="text-lg font-serif px-1">DESCRIPTION</legend>
+                <p className="text-sm">{product.description}</p>
               </fieldset>
 
               {/* Price Box */}
               <fieldset className="border border-gray-300 rounded-lg px-3 py-2 mb-4 shadow-sm">
-                <legend className="text-xs font-semibold px-1">PRICE</legend>
-                <p className="text-xl font-serif">${product.price}</p>
+                <legend className="text-lg font-serif px-1">PRICE</legend>
+                <p className="text-sm">${product.price}</p>
               </fieldset>
 
               {/* Accordion */}
               <div className="w-full max-w-md mt-2 space-y-1">
 
-                {/* Product Details */}
-                <div className="border-b py-2">
-                  <button
-                    onClick={() => toggleSection("details")}
-                    className="flex justify-between items-center w-full text-sm font-semibold"
-                  >
-                    Product Details
-                    <span className={`text-lg transition-transform duration-300 ${openSection === "details" ? "rotate-45" : ""}`}>+</span>
-                  </button>
-                  <div className={`overflow-hidden transition-all duration-300 ${openSection === "details" ? "max-h-32 mt-2" : "max-h-0"}`}>
-                    <div className="text-gray-600 text-sm space-y-1 px-1">
-                      <p><span className="font-medium text-black">Brand:</span> {product.brand}</p>
-                      <p><span className="font-medium text-black">Category:</span> {product.category}</p>
-                      <p><span className="font-medium text-black">Gender:</span> {product.gender}</p>
-                    </div>
-                  </div>
-                </div>
+              
+{/* Product Details */}
+<div className="border-b py-2">
+  <button
+    onClick={() => toggleSection("details")}
+    className="flex justify-between items-center w-full text-lg font-serif"
+  >
+    Product Details
+    <span className={`text-lg transition-transform duration-300 ${openSection === "details" ? "rotate-45" : ""}`}>+</span>
+  </button>
 
-                {/* Specifications */}
-                <div className="border-b py-2">
-                  <button
-                    onClick={() => toggleSection("spec")}
-                    className="flex justify-between items-center w-full text-sm font-semibold"
-                  >
-                    Specifications
-                    <span className={`text-lg transition-transform duration-300 ${openSection === "spec" ? "rotate-45" : ""}`}>+</span>
-                  </button>
-                  <div className={`overflow-hidden transition-all duration-300 ${openSection === "spec" ? "max-h-32 mt-2" : "max-h-0"}`}>
-                    <div className="text-gray-600 text-sm space-y-1 px-1">
-                      <p><span className="font-medium text-black">Color:</span> {product.color}</p>
-                      <p><span className="font-medium text-black">Strap:</span> {product.strap}</p>
-                    </div>
-                  </div>
-                </div>
+  <div className={`overflow-hidden transition-all duration-300 ${openSection === "details" ? "max-h-32 mt-2" : "max-h-0"}`}>
+    <div className="text-gray-600 text-sm px-1">
+      <p>
+        The {product.color.toLowerCase()} {product.name} brand is <span className="font-medium text-black">{product.brand}</span>, belongs to the <span className="font-medium text-black">{product.category}</span> category, and is designed for <span className="font-medium text-black">{product.gender}</span>.
+      </p>
+    </div>
+  </div>
+</div>
+
+{/* Specifications */}
+<div className="border-b py-2">
+  <button
+    onClick={() => toggleSection("spec")}
+    className="flex justify-between items-center w-full text-lg font-serif"
+  >
+    Specifications
+    <span className={`text-lg transition-transform duration-300 ${openSection === "spec" ? "rotate-45" : ""}`}>+</span>
+  </button>
+
+  <div className={`overflow-hidden transition-all duration-300 ${openSection === "spec" ? "max-h-32 mt-2" : "max-h-0"}`}>
+    <div className="text-gray-600 text-sm px-1">
+      <p>
+        It comes in <span className="font-medium text-black">{product.color}</span> color with a <span className="font-medium text-black">{product.strap}</span> strap.
+      </p>
+    </div>
+  </div>
+</div>
 
               </div>
             </div>
