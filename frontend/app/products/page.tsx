@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FiFilter, FiPlus, FiX, FiMinus, FiHeart } from "react-icons/fi";
 import { BsCart3 } from "react-icons/bs";
 import { AiOutlineCheckCircle } from "react-icons/ai";
@@ -63,11 +63,31 @@ export default function ProductsPage() {
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState(productsData);
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 6; // ← 6 products per page
+  const productsPerPage = 6;
   const filterOptions = generateFilters(productsData);
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
-  const toggleExpand = (category) => setExpanded({ ...expanded, [category]: !expanded[category] });
+  const [tagFilters, setTagFilters] = useState({
+    discount: false,
+    newArrival: false,
+    outOfStock: false,
+  });
+
+  // Live apply only for tags
+  useEffect(() => applyFilters(), [tagFilters]);
+
+  const toggleTagFilter = (tag) => setTagFilters(prev => ({ ...prev, [tag]: !prev[tag] }));
+
+  // Only one category open at a time
+  const toggleExpand = (category) => {
+    setExpanded(prev => {
+      const newExpanded = {};
+      Object.keys(filterOptions).forEach(cat => newExpanded[cat] = false);
+      newExpanded[category] = !prev[category];
+      return newExpanded;
+    });
+  };
+
   const toggleFilter = (category, value) => {
     let updatedFilters = [...selectedFilters];
     const exists = updatedFilters.find(f => f.category === category && f.value === value);
@@ -75,10 +95,23 @@ export default function ProductsPage() {
     else updatedFilters = [...updatedFilters.filter(f => f.category !== category), { category, value }];
     setSelectedFilters(updatedFilters);
   };
+
   const removeFilter = (filter) => setSelectedFilters(selectedFilters.filter(f => f !== filter));
-  const clearAllFilters = () => { setSelectedFilters([]); setFilteredProducts(productsData); setCurrentPage(1); };
+
+  const clearAllFilters = () => {
+    setSelectedFilters([]);
+    setTagFilters({ discount: false, newArrival: false, outOfStock: false });
+    setFilteredProducts(productsData);
+    setCurrentPage(1);
+  };
+
   const applyFilters = () => {
     let filtered = productsData;
+
+    if (tagFilters.discount) filtered = filtered.filter(p => p.discount);
+    if (tagFilters.newArrival) filtered = filtered.filter(p => p.new);
+    if (tagFilters.outOfStock) filtered = filtered.filter(p => p.outofstock);
+
     selectedFilters.forEach(f => {
       switch(f.category) {
         case "Brands": filtered = filtered.filter(p => p.brand === f.value); break;
@@ -96,9 +129,9 @@ export default function ProductsPage() {
         case "Gender": filtered = filtered.filter(p => p.gender === f.value); break;
       }
     });
+
     setFilteredProducts(filtered);
     setCurrentPage(1);
-    setOpenFilter(false);
   };
 
   const indexOfLastProduct = currentPage * productsPerPage;
@@ -113,8 +146,6 @@ export default function ProductsPage() {
 
   return (
     <section className="w-full min-h-screen px-12 py-12 poppins relative">
-
-      {/* Toast Notification */}
       {toast && (
         <div className="fixed bottom-6 right-6 flex items-center gap-3 bg-white border border-gray-200 shadow-xl px-5 py-3 animate-slideIn z-50">
           <AiOutlineCheckCircle className="text-green-500 text-2xl" />
@@ -126,20 +157,26 @@ export default function ProductsPage() {
 
       <h1 className="text-7xl font-extralight text-center mb-12 allura">Our Products</h1>
 
-      {/* Filter Button */}
       <div onClick={() => setOpenFilter(!openFilter)} className="flex items-center gap-2 cursor-pointer mb-10">
         <span className="text-lg font-semibold">Filters</span>
         <FiFilter size={22} />
       </div>
 
       <div className="flex gap-10">
-        {/* Sidebar */}
         <div className={`transition-all duration-500 overflow-hidden ${openFilter ? "w-80" : "w-0"}`}>
           <div className={`border p-6 bg-white relative ${openFilter ? "max-h-[1200px]" : "max-h-0"} transition-all duration-500`}>
             <div className="flex justify-between items-center mb-4">
               <p className="text-sm text-gray-400 cursor-pointer hover:underline" onClick={clearAllFilters}>Clear All Filters</p>
               <button onClick={() => setOpenFilter(false)} className="text-gray-500"><FiX size={20} /></button>
             </div>
+
+            {/* Tags */}
+            <div className="flex gap-2 mb-4 flex-wrap">
+              <span onClick={() => toggleTagFilter("discount")} className={`cursor-pointer px-2 py-1 text-[11px] rounded-full font-medium transition shadow-sm ${tagFilters.discount ? "bg-red-500 text-white" : "bg-gray-100 text-gray-700 hover:bg-red-200"}`}>Discount</span>
+              <span onClick={() => toggleTagFilter("newArrival")} className={`cursor-pointer px-2 py-1 text-[11px] rounded-full font-medium transition shadow-sm ${tagFilters.newArrival ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-700 hover:bg-blue-200"}`}>New Arrival</span>
+              <span onClick={() => toggleTagFilter("outOfStock")} className={`cursor-pointer px-2 py-1 text-[11px] rounded-full font-medium transition shadow-sm ${tagFilters.outOfStock ? "bg-gray-800 text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-700 hover:text-white"}`}>Out of Stock</span>
+            </div>
+
             <div className="flex flex-wrap gap-2 mb-4">
               {selectedFilters.map((f, idx) => (
                 <div key={idx} className="flex items-center bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full">
@@ -148,6 +185,7 @@ export default function ProductsPage() {
                 </div>
               ))}
             </div>
+
             {Object.keys(filterOptions).map((category, idx) => (
               <div key={idx} className="mb-4">
                 <div className="flex justify-between items-center cursor-pointer py-2" onClick={() => toggleExpand(category)}>
@@ -160,13 +198,7 @@ export default function ProductsPage() {
                       {filterOptions.Price.map((range, idx) => {
                         const selected = selectedFilters.some(f => f.category === "Price" && f.value === range);
                         return (
-                          <div
-                            key={idx}
-                            onClick={() => toggleFilter("Price", range)}
-                            className={`cursor-pointer px-3 py-1 rounded-full border ${selected ? "bg-black text-white border-black" : "bg-white text-gray-700 border-gray-300"} hover:bg-gray-900 hover:text-white transition`}
-                          >
-                            {range}
-                          </div>
+                          <div key={idx} onClick={() => toggleFilter("Price", range)} className={`cursor-pointer px-3 py-1 rounded-full border ${selected ? "bg-black text-white border-black" : "bg-white text-gray-700 border-gray-300"} hover:bg-gray-900 hover:text-white transition text-[12px]`}>{range}</div>
                         );
                       })}
                     </div>
@@ -175,11 +207,7 @@ export default function ProductsPage() {
                       const selected = selectedFilters.some(f => f.category === category && f.value === option);
                       const disabled = selectedFilters.some(f => f.category === category) && !selected;
                       return (
-                        <div
-                          key={idx2}
-                          className={`flex items-center gap-2 py-1 cursor-pointer ${disabled ? "opacity-40 pointer-events-none" : ""}`}
-                          onClick={() => toggleFilter(category, option)}
-                        >
+                        <div key={idx2} className={`flex items-center gap-2 cursor-pointer text-[12px] py-1 ${disabled ? "opacity-40 pointer-events-none" : ""}`} onClick={() => toggleFilter(category, option)}>
                           <div className={`w-4 h-4 border rounded-full flex-shrink-0 flex items-center justify-center ${selected ? "bg-black" : "bg-white"}`}></div>
                           <span>{option}</span>
                         </div>
@@ -189,152 +217,87 @@ export default function ProductsPage() {
                 </div>
               </div>
             ))}
+
+            {/* Apply button for other filters */}
             <button className="w-full bg-black text-white py-3 mt-4" onClick={applyFilters}>APPLY</button>
           </div>
         </div>
 
         {/* Products Grid */}
         <div className={`grid gap-8 flex-1 transition-all duration-500 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3`}>
-          {/* {currentProducts.map((product) => (
-            <div key={product.id} className="border p-5 hover:shadow-lg transition relative flex flex-col justify-between"> */}
-           {currentProducts.map((product) => (
-  <div
-    key={product.id}
-    className={`border p-5 hover:shadow-lg transition relative flex flex-col justify-between 
-    ${product.outofstock ? "opacity-50 pointer-events-none" : ""}`}
-  >
+          {currentProducts.map((product) => (
+            <div key={product.id} className={`border p-5 hover:shadow-lg transition relative flex flex-col justify-between ${product.outofstock ? "opacity-50 pointer-events-none" : ""}`}>
+              <div className="relative h-64 w-full bg-gray-100 group cursor-pointer overflow-hidden">
+                <div className="absolute top-2 left-2 flex flex-col gap-1 z-50">
+                  {product.outofstock && <span className="text-[10px] font-medium px-2 py-[2px] rounded-full bg-gray-800 text-white shadow-sm uppercase tracking-wide">Out Of Stock</span>}
+                  {product.discount && <span className="text-[10px] font-medium px-2 py-[2px] rounded-full bg-red-500 text-white shadow-sm uppercase tracking-wide">{product.discount}% OFF</span>}
+                  {product.new && <span className="text-[10px] font-medium px-2 py-[2px] rounded-full bg-blue-500 text-white shadow-sm uppercase tracking-wide">New Arrival</span>}
+                </div>
 
-    <div className="relative h-64 w-full bg-gray-100 group cursor-pointer overflow-hidden">
+                <Link href={`/products/${product.id}`} className={product.outofstock ? "pointer-events-none" : ""}>
+                  <Image src={product.img} alt={product.name} fill className="object-contain" />
+                </Link>
 
-      {/* Product Tags */}
-      {/* <div className="absolute top-2 left-2 flex flex-col gap-1 z-50">
+                <div className={`absolute top-2 right-2 flex flex-col gap-2 transition ${product.outofstock ? "opacity-0" : "opacity-0 group-hover:opacity-100"}`}>
+                  <button className="bg-white p-3 rounded-full shadow hover:bg-gray-200 transition cursor-pointer"><FiHeart className="text-red-500 text-xl" /></button>
+                  <button onClick={() => handleAddCart(product)} className="bg-white p-3 rounded-full shadow hover:bg-gray-200 transition cursor-pointer"><BsCart3 className="text-gray-800 text-xl" /></button>
+                </div>
+              </div>
 
-        {product.outofstock && (
-          <span className="text-[10px] px-2 py-[3px] rounded-full bg-gray-800 text-white font-medium shadow">
-            Out Of Stock
-          </span>
-        )}
+              <h3 className="text-lg mt-4 font-semibold">{product.name}</h3>
 
-        {product.discount && (
-          <span className="text-[10px] px-2 py-[3px] rounded-full bg-red-500 text-white font-medium shadow">
-            {product.discount}% OFF
-          </span>
-        )}
-
-        {product.new && (
-          <span className="text-[10px] px-2 py-[3px] rounded-full bg-blue-500 text-white font-medium shadow">
-            New Arrival
-          </span>
-        )}
-
-      </div> */}
-
-      {/* Product Tags */}
-<div className="absolute top-2 left-2 flex flex-col gap-1 z-50">
-  {product.outofstock && (
-    <span className="text-[10px] font-medium px-2 py-[2px] rounded-full bg-gray-800 text-white shadow-sm uppercase tracking-wide">
-      Out Of Stock
-    </span>
-  )}
-
-  {product.discount && (
-    <span className="text-[10px] font-medium px-2 py-[2px] rounded-full bg-red-500 text-white shadow-sm uppercase tracking-wide">
-      {product.discount}% OFF
-    </span>
-  )}
-
-  {product.new && (
-    <span className="text-[10px] font-medium px-2 py-[2px] rounded-full bg-blue-500 text-white shadow-sm uppercase tracking-wide">
-      New Arrival
-    </span>
-  )}
-</div>
-
-      {/* Product Image */}
-      <Link
-        href={`/products/${product.id}`}
-        className={product.outofstock ? "pointer-events-none" : ""}
-      >
-        <Image
-          src={product.img}
-          alt={product.name}
-          fill
-          className="object-contain"
-        />
-      </Link>
-
-      {/* Heart & Cart Icons */}
-      <div
-        className={`absolute top-2 right-2 flex flex-col gap-2 transition
-          ${product.outofstock ? "opacity-0" : "opacity-0 group-hover:opacity-100"}`}
-      >
-        <button className="bg-white p-3 rounded-full shadow hover:bg-gray-200 transition cursor-pointer">
-          <FiHeart className="text-red-500 text-xl" />
-        </button>
-
-        <button
-          onClick={() => handleAddCart(product)}
-          className="bg-white p-3 rounded-full shadow hover:bg-gray-200 transition cursor-pointer"
-        >
-          <BsCart3 className="text-gray-800 text-xl" />
-        </button>
-      </div>
-
-    </div>
-
-    <h3 className="text-lg mt-4 font-semibold">{product.name}</h3>
-
-    <div className="mt-2 flex justify-between items-center">
-      <Link
-        href={`/products/${product.id}`}
-        className={product.outofstock ? "pointer-events-none" : ""}
-      >
-        <button className="bg-black text-white px-6 py-2 border border-black hover:bg-white hover:text-black transition font-medium cursor-pointer">
-          View
-        </button>
-      </Link>
-
-      <p className="font-serif text-2xl">${product.price}</p>
-    </div>
-
-  </div>
-))}
+              <div className="mt-2 flex justify-between items-center">
+                <Link href={`/products/${product.id}`} className={product.outofstock ? "pointer-events-none" : ""}>
+                  <button className="bg-black text-white px-6 py-2 border border-black hover:bg-white hover:text-black transition font-medium cursor-pointer">View</button>
+                </Link>
+                <p className="font-serif text-2xl">${product.price}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
       {/* Pagination */}
-      {/* <div className="flex justify-center items-center gap-4 mt-16">
-        <button className="px-4 py-2 border p-3 hover:bg-gray-100 transition" onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}>&lt;</button>
-        <span className="px-4 py-2 border bg-black text-white">{currentPage}</span>
-        <button className="px-4 py-2 border p-3 hover:bg-gray-100 transition" onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}>&gt;</button>
-      </div> */}
-
-      {/* Pagination */}
-<div className="flex justify-center items-center gap-4 mt-16 ">
-  {/* Previous */}
-  <button
-    className={`cursor-pointer px-4 py-2 border p-3 transition ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-100"}`}
-    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-    disabled={currentPage === 1}
-  >
-    &lt;
-  </button>
-
-  {/* Current Page */}
-  <span className="cursor-pointer px-4 py-2 border bg-black text-white">{currentPage}</span>
-
-  {/* Next */}
-  <button
-    className={`cursor-pointer px-4 py-2 border p-3 transition ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-100"}`}
-    onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-    disabled={currentPage === totalPages}
-  >
-    &gt;
-  </button>
-</div>
-
+      <div className="flex justify-center items-center gap-4 mt-16 ">
+        <button className={`cursor-pointer px-4 py-2 border p-3 transition ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-100"}`} onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} disabled={currentPage === 1}>&lt;</button>
+        <span className="cursor-pointer px-4 py-2 border bg-black text-white">{currentPage}</span>
+        <button className={`cursor-pointer px-4 py-2 border p-3 transition ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-100"}`} onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages}>&gt;</button>
+      </div>
     </section>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
