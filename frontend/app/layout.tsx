@@ -43,6 +43,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/footer";
 import { CartProvider } from "./Context/cartcontext";
 import { Poppins, Allura } from "next/font/google";
+import { WishlistProvider } from "./Context/wishlistcontext";
 
 export const metadata: Metadata = {
   title: "LuxeTick Watch Ecom Website",
@@ -68,9 +69,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${poppins.variable} ${allura.variable}`}>
         <ClientWrapper>
           <CartProvider>
+            <WishlistProvider>
             <Navbar />
             {children}
             <Footer />
+            </WishlistProvider>
           </CartProvider>
         </ClientWrapper>
       </body>
