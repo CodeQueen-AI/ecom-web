@@ -85,7 +85,7 @@ export default function ProductDetailPage() {
       quantity: quantity,
     });
 
-    setToastMessage(`"${product.name}" added to cart`);
+    setToastMessage(`"${product.name}" Added To Cart!`);
     setTimeout(() => setToastMessage(null), 3000);
   };
 
@@ -122,7 +122,7 @@ export default function ProductDetailPage() {
               {/* Price Box */}
               <fieldset className="border border-gray-300 rounded-lg px-3 py-2 mb-4 shadow-sm">
                 <legend className="text-lg font-serif px-1">PRICE</legend>
-                <p className="text-sm">${product.price}</p>
+                <p className="text-2xl font-serif">${product.price}</p>
               </fieldset>
 
               {/* Accordion */}
@@ -174,23 +174,22 @@ export default function ProductDetailPage() {
             <div className="mt-4">
 
               {/* Quantity + Favorite */}
-              <div className="flex items-center justify-center lg:justify-start space-x-3 mb-4">
-                <div className="flex items-center space-x-2 border border-gray-300 rounded-lg px-3 py-1">
+              <div className="flex space-x-3 mb-4">
+                <div className="flex items-center space-x-2 border border-gray-300 rounded-lg px-4 py-2">
                   <button
                     onClick={() => setQuantity((prev) => Math.max(prev - 1, 1))}
-                    className="w-6 h-6 flex items-center justify-center border border-gray-400 rounded"
-                  >
+                    className="w-6 h-6 flex items-center justify-center border border-gray-400 rounded cursor-pointer">
                     -
                   </button>
                   <input
                     type="number"
                     value={quantity}
                     onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                    className="w-10 h-6 text-center border-none focus:outline-none text-sm"
+                    className="w-10 h-6 text-center border-none focus:outline-none text-sm cursor-pointer"
                   />
                   <button
                     onClick={() => setQuantity((prev) => prev + 1)}
-                    className="w-6 h-6 flex items-center justify-center border border-gray-400 rounded"
+                    className="w-6 h-6 flex items-center justify-center border border-gray-400 rounded cursor-pointer"
                   >
                     +
                   </button>
@@ -198,17 +197,17 @@ export default function ProductDetailPage() {
 
                 <button
                   onClick={() => setIsFavorite(!isFavorite)}
-                  className="text-2xl text-pink-500 cursor-pointer"
+                  className="text-4xl text-pink-500 cursor-pointer"
                 >
                   {isFavorite ? <FaHeart /> : <FaRegHeart />}
                 </button>
               </div>
 
               {/* Add to Cart Button */}
-              <div className="flex justify-center lg:justify-start">
+              <div className="flex justify-center">
                 <button
                   onClick={handleAddToCart}
-                  className="px-10 py-3 border border-white text-white bg-black font-bold hover:bg-white hover:text-black hover:border-black transition"
+                  className="px-12 py-4 border border-white text-white bg-black  hover:bg-white hover:text-black hover:border-black transition cursor-pointer"
                 >
                   Add to Cart
                 </button>
@@ -223,9 +222,9 @@ export default function ProductDetailPage() {
 
       {/* Simplified Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 flex items-center gap-3 bg-white border border-gray-200 shadow-xl px-5 py-3 animate-slideIn z-50 rounded-lg">
+        <div className="fixed bottom-6 right-6 flex items-center gap-3 bg-white border border-gray-200 shadow-xl px-5 py-3 animate-slideIn z-50">
           <AiOutlineCheckCircle className="text-green-500 text-2xl" />
-          <p className="text-sm text-gray-800">{toastMessage}</p>
+          <p className="text-sm ">{toastMessage}</p>
         </div>
       )}
 
