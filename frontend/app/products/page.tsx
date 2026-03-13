@@ -197,70 +197,78 @@ export default function ProductsPage() {
         <div className={`grid gap-8 flex-1 transition-all duration-500 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3`}>
           {/* {currentProducts.map((product) => (
             <div key={product.id} className="border p-5 hover:shadow-lg transition relative flex flex-col justify-between"> */}
-            {currentProducts.map((product) => (
+           {currentProducts.map((product) => (
   <div
     key={product.id}
     className={`border p-5 hover:shadow-lg transition relative flex flex-col justify-between 
-    ${product.outofstock ? "opacity-50 pointer-events-none" : ""}`}
+    ${product.outofstock ? "opacity-50" : ""}`}
   >
 
-              <div className="relative h-64 w-full bg-gray-100 group cursor-pointer">
+    <div className="relative h-64 w-full bg-gray-100 group cursor-pointer overflow-hidden">
 
-                {/* Product Tags */}
-<div className="absolute top-2 left-2 flex flex-col gap-1 z-10">
+      {/* Product Tags */}
+      <div className="absolute top-2 left-2 flex flex-col gap-1 z-50">
 
-  {product.outofstock && (
-    <span className="text-[10px] px-2 py-[3px] rounded-full bg-gray-700 text-white font-medium shadow">
-      Out Of Stock
-    </span>
-  )}
+        {product.outofstock && (
+          <span className="text-[10px] px-2 py-[3px] rounded-full bg-gray-800 text-white font-medium shadow">
+            Out Of Stock
+          </span>
+        )}
 
-  {product.discount && (
-    <span className="text-[10px] px-2 py-[3px] rounded-full bg-red-500 text-white font-medium shadow">
-      {product.discount}% OFF
-    </span>
-  )}
+        {product.discount && (
+          <span className="text-[10px] px-2 py-[3px] rounded-full bg-red-500 text-white font-medium shadow">
+            {product.discount}% OFF
+          </span>
+        )}
 
-  {product.new && (
-    <span className="text-[10px] px-2 py-[3px] rounded-full bg-blue-500 text-white font-medium shadow">
-      New Arrival
-    </span>
-  )}
+        {product.new && (
+          <span className="text-[10px] px-2 py-[3px] rounded-full bg-blue-500 text-white font-medium shadow">
+            New Arrival
+          </span>
+        )}
 
-</div>
+      </div>
 
+      <Link href={`/products/${product.id}`}>
+        <Image
+          src={product.img}
+          alt={product.name}
+          fill
+          className="object-contain"
+        />
+      </Link>
 
+      {/* Heart & Cart Icons */}
+      <div className="absolute top-2 right-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition">
+        <button className="bg-white p-3 rounded-full shadow hover:bg-gray-200 transition cursor-pointer">
+          <FiHeart className="text-red-500 text-xl" />
+        </button>
 
-                <Link href={`/products/${product.id}`}>
-                  <Image src={product.img} alt={product.name} fill className="object-contain" />
-                </Link>
+        <button
+          onClick={() => handleAddCart(product)}
+          disabled={product.outofstock}
+          className="bg-white p-3 rounded-full shadow hover:bg-gray-200 transition cursor-pointer disabled:opacity-40"
+        >
+          <BsCart3 className="text-gray-800 text-xl" />
+        </button>
+      </div>
 
-                {/* Heart & Cart Icons */}
-                <div className="absolute top-2 right-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition">
-                  <button className="bg-white p-3 rounded-full shadow hover:bg-gray-200 transition cursor-pointer">
-                    <FiHeart className="text-red-500 text-xl" />
-                  </button>
-                  <button
-                    onClick={() => handleAddCart(product)}
-                    className="bg-white p-3 rounded-full shadow hover:bg-gray-200 transition cursor-pointer"
-                  >
-                    <BsCart3 className="text-gray-800 text-xl" />
-                  </button>
-                </div>
-              </div>
+    </div>
 
-              <h3 className="text-lg mt-4 font-semibold">{product.name}</h3>
+    <h3 className="text-lg mt-4 font-semibold">{product.name}</h3>
 
-              <div className="mt-2 flex justify-between items-center">
-                <Link href={`/products/${product.id}`}>
-                  <button className="bg-black text-white px-6 py-2 border border-black hover:bg-white hover:text-black transition font-medium cursor-pointer">
-                    View
-                  </button>
-                </Link>
-                <p className="font-serif text-2xl">${product.price}</p>
-              </div>
-            </div>
-          ))}
+    <div className="mt-2 flex justify-between items-center">
+      <Link href={`/products/${product.id}`}>
+        <button className="bg-black text-white px-6 py-2 border border-black hover:bg-white hover:text-black transition font-medium cursor-pointer">
+          View
+        </button>
+      </Link>
+
+      <p className="font-serif text-2xl">${product.price}</p>
+    </div>
+
+  </div>
+))}
         </div>
       </div>
 
