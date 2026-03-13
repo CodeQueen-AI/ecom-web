@@ -5,9 +5,7 @@ import { useState, useEffect } from "react";
 import { FiFilter, FiPlus, FiX, FiMinus, FiHeart } from "react-icons/fi";
 import { BsCart3 } from "react-icons/bs";
 import { AiOutlineCheckCircle, AiOutlineProduct } from "react-icons/ai";
-import { useCart } from "../Context/cartcontext"; // existing cart context
-
-// New: Wishlist context
+import { useCart } from "../Context/cartcontext"; 
 import { useWishlist } from "../Context/wishlistcontext";
 
 const productsData = [
@@ -47,7 +45,6 @@ const productsData = [
   { id: 42, name: "Minimal Lady", brand: "Fossil", color: "Black", price: 290, strap: "Leather", category: "Classic", gender: "Women", img: "/products/p36.jpg", new: true },
   { id: 43, name: "Black Chronograph", brand: "Tag Heuer", color: "Black", price: 560, strap: "Metal", category: "Sport", gender: "Men", img: "/products/p37.jpg" }
 ];
-
 
 // Filters generation same as before
 const generateFilters = (products) => ({
@@ -167,16 +164,12 @@ export default function ProductsPage() {
           <p className="text-sm">{toast}</p>
         </div>
       )}
-
       <h1 className="text-7xl font-extralight text-center mb-12 allura">Our Products</h1>
-
       <div onClick={() => setOpenFilter(!openFilter)} className="flex items-center gap-2 cursor-pointer mb-10">
         <span className="text-lg font-semibold">Filters</span>
         <FiFilter size={22} />
       </div>
-
       <div className="flex gap-10">
-        {/* Filter sidebar same as before */}
         {/* Filter Sidebar */}
         <div className={`transition-all duration-500 overflow-hidden ${openFilter ? "w-80" : "w-0"}`}>
           <div className={`border p-6 bg-white relative ${openFilter ? "max-h-[1200px]" : "max-h-0"} transition-all duration-500`}>
@@ -233,7 +226,7 @@ export default function ProductsPage() {
               </div>
             ))}
 
-            {/* Apply button for other filters */}
+            {/* Apply Button*/}
             <button className="w-full bg-black text-white py-3 mt-4 cursor-pointer" onClick={applyFilters}>APPLY</button>
           </div>
         </div>
@@ -254,7 +247,6 @@ export default function ProductsPage() {
                     {product.discount && <span className="text-[10px] font-medium px-2 py-[2px] rounded-full bg-red-500 text-white shadow-sm uppercase tracking-wide">{product.discount}% OFF</span>}
                     {product.new && <span className="text-[10px] font-medium px-2 py-[2px] rounded-full bg-green-500 text-white shadow-sm uppercase tracking-wide">New</span>}
                   </div>
-
                   <Link href={`/products/${product.id}`} className={product.outofstock ? "pointer-events-none" : ""}>
                     <Image src={product.img} alt={product.name} fill className="object-contain" />
                   </Link>
@@ -282,9 +274,6 @@ export default function ProductsPage() {
           </div>
         )}
       </div>
-
-      {/* Pagination same as before */}
-      {/* ...existing pagination code... */}
        {/* Pagination */}
       {filteredProducts.length > 0 && (
         <div className="flex justify-center items-center gap-4 mt-16 ">
