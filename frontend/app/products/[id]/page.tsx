@@ -4,8 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { AiOutlineCheckCircle } from "react-icons/ai";
-import { useCart } from "../../Context/cartcontext";
-import { useWishlist } from "../../Context/wishlistcontext";
+import { useCart } from "../../context/cartcontext";
+import { useWishlist } from "../../context/wishlistcontext";
 
 interface Product {
   id: number;

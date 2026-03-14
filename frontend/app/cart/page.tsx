@@ -2,7 +2,7 @@
 import { FaTrash } from "react-icons/fa";
 import { GoPlus } from "react-icons/go";
 import { FiMinus } from "react-icons/fi";
-import { useCart } from "../Context/cartcontext";
+import { useCart } from "../context/cartcontext";
 import Image from "next/image";
 import { LiaShoppingCartSolid } from "react-icons/lia";
 import { AiOutlineCheckCircle, AiOutlineCloseCircle } from "react-icons/ai";

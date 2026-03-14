@@ -4,8 +4,8 @@ import Link from "next/link";
 import { FiX } from "react-icons/fi";
 import { BsCart3 } from "react-icons/bs";
 import { AiOutlineCheckCircle, AiOutlineProduct } from "react-icons/ai";
-import { useWishlist } from "../Context/wishlistcontext";
-import { useCart } from "../Context/cartcontext";
+import { useWishlist } from "../context/wishlistcontext";
+import { useCart } from "../context/cartcontext";
 import { useState } from "react";
 
 export default function WishlistPage() {

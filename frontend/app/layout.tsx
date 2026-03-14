@@ -41,9 +41,9 @@ import "./globals.css";
 import ClientWrapper from "./components/clientwrapper";
 import Navbar from "./components/Navbar";
 import Footer from "./components/footer";
-import { CartProvider } from "./Context/cartcontext";
+import { CartProvider } from "./context/cartcontext";
 import { Poppins, Allura } from "next/font/google";
-import { WishlistProvider } from "./Context/wishlistcontext";
+import { WishlistProvider } from "./context/wishlistcontext";
 
 export const metadata: Metadata = {
   title: "LuxeTick Watch Ecom Website",

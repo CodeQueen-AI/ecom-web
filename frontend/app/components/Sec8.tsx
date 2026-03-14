@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useCart } from "../Context/cartcontext";
+import { useCart } from "../context/cartcontext";
 import { useState } from "react";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 
