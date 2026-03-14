@@ -25,8 +25,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './auth/routes/auth.js';
-import orderRoutes from './orders/routes/orderRoutes.js';   // 👈 add this
-
+import orderRoutes from "./orders/routes/orders.js"
 dotenv.config();
 const app = express();
 
