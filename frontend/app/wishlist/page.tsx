@@ -89,7 +89,7 @@ export default function WishlistPage() {
                     <td className="py-4">
                       <button
                         onClick={() => handleAddCart(item)}
-                        className="px-3 py-1 bg-black text-white text-sm rounded hover:bg-white hover:text-black border border-black transition"
+                        className="px-3 py-1 bg-black text-white text-sm  hover:bg-white hover:text-black border border-black transition cursor-pointer"
                       >
                         Add to Cart
                       </button>
@@ -99,7 +99,7 @@ export default function WishlistPage() {
                     <td className="py-4">
                       <button
                         onClick={() => handleRemove(item.id)}
-                        className="text-pink-500 hover:text-pink-600 transition"
+                        className="text-pink-500 hover:text-pink-600 transition cursor-pointer"
                       >
                         <FaTrash />
                       </button>
