@@ -1,85 +1,15 @@
-// "use client";
-// import Image from "next/image";
-// import Link from "next/link";
-// import { useState } from "react";
-// import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-
-// export default function LoginPage() {
-//   const [showPassword, setShowPassword] = useState(false);
-//   return (
-//     <section className="w-full min-h-screen flex poppins">
-//       <div className="w-1/2 flex items-center justify-center bg-white">
-//         <div className="w-[70%]">
-//           <h1 className="text-4xl mb-10 font-semibold">
-//             Welcome Back
-//           </h1>
-//           <div className="mb-8">
-//             <label className="text-sm">Email</label>
-//             <input
-//               type="email"
-//               className="w-full border-b border-black outline-none py-2" />
-//           </div>
-//           <div className="mb-10 relative">
-//             <label className="text-sm">Password</label>
-//             <input
-//               type={showPassword ? "text" : "password"}
-//               className="w-full border-b border-black outline-none py-2 pr-8"/>
-//             <span
-//               onClick={() => setShowPassword(!showPassword)}
-//               className="absolute right-0 bottom-3 cursor-pointer text-lg">
-//               {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
-//             </span>
-//           </div>
-//           <div className="flex justify-center">
-//             <button className="w-48 bg-black text-white border border-white py-3 hover:bg-white hover:text-black hover:border-black transition cursor-pointer">
-//               Login
-//             </button>
-//           </div>
-//           <p className="text-sm mt-6 text-center">
-//             Don't have an account?{" "}
-//             <Link href="/signup" className="font-semibold underline">
-//               Sign Up
-//             </Link>
-//           </p>
-//         </div>
-//       </div>
-//       <div className="w-1/2 relative">
-//         <Image
-//           src="/watch/w28.jpg"
-//           alt="login image"
-//           fill
-//           className="object-cover"/>
-//       </div>
-//     </section>
-//   );
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 "use client";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -94,13 +24,12 @@ export default function LoginPage() {
 
       const data = await res.json();
 
-      if (!res.ok) {
-        setError(data.msg || data.error);
-      } else {
+      if (!res.ok) setError(data.msg || data.error);
+      else {
         console.log("Login successful. Token:", data.token);
-        localStorage.setItem("token", data.token); // save token for protected routes
+        localStorage.setItem("token", data.token);
       }
-    } catch (err) {
+    } catch {
       setError("Something went wrong. Try again.");
     }
   };
@@ -108,51 +37,60 @@ export default function LoginPage() {
   return (
     <section className="w-full min-h-screen flex poppins">
       <div className="w-1/2 flex items-center justify-center bg-white">
-        <div className="w-[70%]">
-          <h1 className="text-4xl mb-10 font-semibold">Welcome Back</h1>
+        <div className="w-full max-w-md mx-auto">
+          <h1 className="text-5xl mb-8 font-semibold text-center">Welcome Back</h1>
 
-          {error && <p className="text-red-500">{error}</p>}
+          {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
-          <form onSubmit={handleSubmit}>
-            <div className="mb-8">
-              <label className="text-sm">Email</label>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label className="text-sm block mb-1">Email</label>
               <input
                 type="email"
                 name="email"
                 value={form.email}
                 onChange={handleChange}
-                className="w-full border-b border-black outline-none py-2"
+                className="w-full border-b border-gray-400 outline-none py-1 px-2"
                 required
               />
             </div>
-            <div className="mb-10 relative">
-              <label className="text-sm">Password</label>
+
+            <div className="relative">
+              <label className="text-sm block mb-1">Password</label>
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
                 value={form.password}
                 onChange={handleChange}
-                className="w-full border-b border-black outline-none py-2 pr-8"
+                className="w-full border-b border-gray-400 outline-none py-1 px-2 pr-8"
                 required
               />
               <span
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-0 bottom-3 cursor-pointer text-lg"
+                className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer text-gray-600 text-lg"
               >
-                {showPassword ? "🙈" : "👁️"}
+                {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
               </span>
             </div>
+
+            {/* Forgot Password Link */}
+            <div className="text-right">
+              <Link href="/forgot" className="text-sm text-black hover:underline">
+                Forgot Password?
+              </Link>
+            </div>
+
             <div className="flex justify-center">
               <button
                 type="submit"
-                className="w-48 bg-black text-white border border-white py-3 hover:bg-white hover:text-black hover:border-black transition cursor-pointer"
+                className="w-36 bg-black text-white border border-white py-2 hover:bg-white hover:text-black hover:border-black transition cursor-pointer"
               >
                 Login
               </button>
             </div>
           </form>
 
-          <p className="text-sm mt-6 text-center">
+          <p className="text-sm mt-4 text-center">
             Don't have an account?{" "}
             <Link href="/signup" className="font-semibold underline">
               Sign Up
@@ -160,7 +98,8 @@ export default function LoginPage() {
           </p>
         </div>
       </div>
-      <div className="w-1/2 relative">
+
+      <div className="w-1/2 relative hidden md:block">
         <Image src="/watch/w28.jpg" alt="login image" fill className="object-cover" />
       </div>
     </section>
