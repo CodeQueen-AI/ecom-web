@@ -115,7 +115,7 @@ const Cart = () => {
                         ${item.price}
                       </td>
                       <td>
-                        <div className="flex items-center border rounded-lg w-fit px-3 py-2 gap-4">
+                        <div className="flex items-center border w-fit px-3 py-2 gap-4">
                           <button onClick={() => updateItemQuantity(item.id,item.quantity - 1)}className="cursor-pointer">
                             <FiMinus/>
                           </button>
